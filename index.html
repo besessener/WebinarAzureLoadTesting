@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Performancetesting mit Microsoft Azure Load Testing</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>Performancetesting mit Microsoft Azure Load Testing</h2>
+				<img src="images/azure-load-testing.png" alt="Azure" style="width:40%">
+				<aside class="notes">
+					Shhh, these are your private notes 📝
+				</aside>
+			</section>
+			<section>
+				<h2>Agenda 📋</h2>
+				<ul>
+					<li>kurze Vorstellung</li>
+					<li>Apache JMeter</li>
+					<ul>
+						<li>Web-Applikation testen</li>
+						<li>JMeter skalieren</li>
+					</ul>
+					<li>Azure Load Testing</li>
+					<ul>
+						<li>Kosten</li>
+						<li>Hands-On</li>
+						<li>Azure DevOps Pipelines</li>
+					</ul>
+					<li>Fazit</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h2>Der Sprecher 🙊</h2>
+				</section>
+				<section>
+					<figure>
+						<img src="images/profil.png" alt="Matthias Eggert" style="width:40%">
+						<figcaption>Matthias Eggert</figcaption>
+					</figure>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Apache JMeter 🪶</h2>
+					<ul>
+						<li>Open Source</li>
+						<li>Java basiert</li>
+						<li>GUI und CLI</li>
+						<li>Skalierbar</li>
+						<li>Plugins</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Web-Applikation testen 🌐</h2>
+					<ul>
+						<li>HTTP Request</li>
+						<li>Response Times</li>
+					</ul>
+				</section>
+				<section>
+					<h2>JMeter skalieren ⚖️</h2>
+					<img class="r-stretch" src="images/jmeter-controller-worker.png" alt="JMeter">
+				</section>
+			</section>
+			<section>
+				<section data-background-gradient="linear-gradient(to bottom, black 50%, white 100%)">
+					<h2>Azure Load Testing 🧪</h2>
+					<ul>
+						<li>Cloud basiert</li>
+						<li>Skalierbar</li>
+						<li>Integration in Azure DevOps</li>
+						<li>Monitoring</li>
+					</ul>
+				</section>
+				<section data-background-color="white">
+					<h2>Architektur 🏛️🛕</h2>
+					<img class="r-stretch" src="images/cloud-performance-testing.png" alt="Azure Load Testing">
+				</section>
+				<section data-background-gradient="linear-gradient(to bottom, white 0, black 50%)">
+					<h2>Kosten 🤑</h2>
+				</section>
+				<section>
+					<h2>Hands-On 👐</h2>
+					<ul>
+						<li>Erstellung eines Tests</li>
+						<li>Skalierung</li>
+						<li>Monitoring</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Einbindung in Azure DevOps Pipelines 🔗</h2>
+					<img src="images/azure-devops.png" alt="Azure DevOps" style="width:20%">
+				</section>
+			</section>
+			<section>
+				<h2>Fazit 🩻</h2>
+				<ul>
+					<li>Apache JMeter ist mächtig</li>
+					<li>Microsoft Azure Load Testing ist eine gute Ergänzung</li>
+					<li>Azure DevOps macht das Setup komplett</li>
+				</ul>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			slideNumber: 'c/t',
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
