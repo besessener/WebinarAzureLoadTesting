@@ -10,12 +10,17 @@
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
 	<link rel="stylesheet" href="dist/theme/black.css">
+	<link rel="stylesheet" href="css/reveal-override.css" />
 
-	<!-- Theme used for syntax highlighted code -->
 	<link rel="stylesheet" href="plugin/highlight/monokai.css">
 </head>
 
 <body>
+	<div class="watermark">
+		<a href="https://www.qytera.de/" rel="noopener noreferrer">
+			<img src="images/qytera-logo.png" />
+		</a>
+	</div>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -36,6 +41,7 @@
 					</ul>
 					<li>Azure Load Testing</li>
 					<ul>
+						<li>Architektur</li>
 						<li>Kosten</li>
 						<li>Hands-On</li>
 						<li>Azure DevOps Pipelines</li>
@@ -64,6 +70,7 @@
 						<li>Skalierbar</li>
 						<li>Plugins</li>
 					</ul>
+					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
 				</section>
 				<section>
 					<h2>Web-Applikation testen 🌐</h2>
@@ -71,6 +78,7 @@
 						<li>HTTP Request</li>
 						<li>Response Times</li>
 					</ul>
+					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
 				</section>
 				<section>
 					<h2>JMeter skalieren ⚖️</h2>
@@ -101,6 +109,7 @@
 						<li>Skalierung</li>
 						<li>Monitoring</li>
 					</ul>
+					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
 				</section>
 				<section>
 					<h2>Einbindung in Azure DevOps Pipelines 🔗</h2>
@@ -122,15 +131,11 @@
 	<script src="plugin/notes/notes.js"></script>
 	<script src="plugin/markdown/markdown.js"></script>
 	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/video-popup/video-popup.js"></script>
 	<script>
-		// More info about initialization & config:
-		// - https://revealjs.com/initialization/
-		// - https://revealjs.com/config/
 		Reveal.initialize({
 			slideNumber: 'c/t',
 			hash: true,
-
-			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [RevealHighlight, RevealNotes]
 		});
 	</script>
