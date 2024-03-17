@@ -1,3 +1,5 @@
+pushd %~dp0
 @echo off
-call npm install
-call npm start
+powershell -ExecutionPolicy Bypass -File .\setup.ps1 %* || exit /b 1
+pause
+popd

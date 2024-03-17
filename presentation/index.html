@@ -81,6 +81,32 @@
 					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
 				</section>
 				<section>
+					<pre class="r-stretch">
+						<code data-trim data-noescape data-line-numbers="1-18|8-12">
+							from flask import Flask, request
+							import time
+
+							app = Flask(__name__)
+
+							@app.route('/')
+							def hello():
+								# Retrieve the 'sleep' parameter from the URL
+								sleep_time = float(request.args.get('sleep', 0))
+								
+								# Introduce a delay based on the sleep_time value
+								time.sleep(sleep_time / 1000)
+
+								return f"Slept for {sleep_time} milli seconds."
+
+
+							if __name__ == '__main__':
+								app.run(host='0.0.0.0', port=80)
+						</code>
+					</pre>
+					<br>
+					<a href="https://qyterawebapp.azurewebsites.net/?sleep=2000" target="_blank">Open App 🎁</a>
+				</section>
+				<section>
 					<h2>JMeter skalieren ⚖️</h2>
 					<img class="r-stretch" src="images/jmeter-controller-worker.png" alt="JMeter">
 				</section>
@@ -114,6 +140,7 @@
 				<section>
 					<h2>Einbindung in Azure DevOps Pipelines 🔗</h2>
 					<img src="images/azure-devops.png" alt="Azure DevOps" style="width:20%">
+					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
 				</section>
 			</section>
 			<section>
