@@ -27,13 +27,16 @@
 				<h2>Performancetesting mit Microsoft Azure Load Testing</h2>
 				<img src="images/azure-load-testing.png" alt="Azure" style="width:40%">
 				<aside class="notes">
-					Shhh, these are your private notes 📝
+					Hallo und herzlich willkommen auch von mir. Danke Markus für die Einleitung. Ich freue mich, dass
+					ihr heute hier seid und ich euch ein wenig über das Thema Performancetesting mit Microsoft Azure
+					Load Testing erzählen darf.
 				</aside>
 			</section>
 			<section>
 				<h2>Agenda 📋</h2>
 				<ul>
 					<li>kurze Vorstellung</li>
+					<li>Performance-Testing</li>
 					<li>Apache JMeter</li>
 					<ul>
 						<li>Web-Applikation testen</li>
@@ -48,16 +51,88 @@
 					</ul>
 					<li>Fazit</li>
 				</ul>
+				<aside class="notes">
+					Zunächst werde ich mich kurz vorstellen und dann in das Thema einsteigen. Ich werde euch zeigen, wie
+					Apache JMeter grundsätzlich funktioniert. Ich werde dabei nicht auf high-sophisticated Features
+					eingehen, sondern nur auf wenige Basics. Gerade ausreichend um eine kleine Web-App damit testen zu
+					können. Anschließend werde ich euch Microsoft Azure Load Testing vorstellen und euch zeigen wie
+					Azure Load Testing aufgebaut ist und wie man damit JMeters Skalierbarkeit zu nutze machen kann.
+					Dabei werde ich direkt mit Azure Load Testing arbeiten und euch Hands-On Einblicke geben.
+					Abschließend werde ich euch zeigen, man diese Performancetests dann in eine Azure DevOps Pipeline
+					integrieren kann um die Tests automatisiert und regelmäßig durchzuführen.
+				</aside>
 			</section>
 			<section>
 				<section>
 					<h2>Der Sprecher 🙊</h2>
-				</section>
-				<section>
 					<figure>
 						<img src="images/profil.png" alt="Matthias Eggert" style="width:40%">
 						<figcaption>Matthias Eggert</figcaption>
 					</figure>
+					<aside class="notes">
+						Ich bin DevOps-Engineer mit einer umfangreichen Expertise in der
+						Automobilbranche, wo ich mich tiefgehend mit der Entwicklung sicherheitsrelevanter Funktionen
+						für Bremssysteme und Batteriemanagementsysteme beschäftigt habe. Derzeit arbeite ich bei der
+						Qytera GmbH als DevOps-Engineer und widme mich vor allem der Testautomatisierung mit modernen
+						Tools, sowohl in der Cloud als auch darüber hinaus. Ich habe einen Master of Science in Visual
+						Computing von der Technischen Universität Darmstadt und einen Bachelor in Computervisualistik
+						von der Otto-von-Guericke-Universität Magdeburg. Meine Karriere führte mich in den letzten 11
+						Jahren zu renommierten Unternehmen wie Continental und Marquardt, wo ich bedeutende Beiträge in
+						den Bereichen Entwicklung, Softwareintegration und insbesondere Automatisierung geleistet habe.
+						Ich bin also mit einer umfangreichen Expertise in der Automobilbranche ausgestattet, wo ich mich
+						tiefgehend mit der Entwicklung sicherheitsrelevanter Funktionen für Bremssysteme und
+						Batteriemanagementsysteme beschäftigt habe; im Besonderen mit der Optimierung der Entwicklung
+						und der automatischen und kontinuierlichen Integration und Bereitstellung (CI/CD). Als AWS
+						Certified Cloud Practitioner und mit einer ISTQB FL Zertifizierung ausgestattet, bin ich hier
+						bei Qytera für die Performance-Tests zuständig.
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Performance-Testing ⏱️</h2>
+					<ul>
+						<li>Warum?</li>
+						<li>Wann?</li>
+						<li>Wie?</li>
+					</ul>
+					<aside class="notes">
+						Performance-Tests sind ein entscheidender Aspekt der Softwareentwicklung, der sicherstellt, dass
+						eine Anwendung nicht nur die funktionalen Anforderungen erfüllt, sondern auch in Bezug auf
+						Geschwindigkeit, Stabilität und Skalierbarkeit unter verschiedenen Bedingungen leistungsfähig
+						ist.
+						Bevor wir uns dem spezifischen Thema Azure Load Testing zuwenden, ist es wichtig, einen
+						Überblick
+						über das Konzept des Performance-Testings zu geben.
+					</aside>
+				</section>
+				<section>
+					<h2>Performance-Testing Arten 🏋️🧘🚣🏃</h2>
+					<img src="images/performance-tests-types.png" alt="Performance-Testing Arten" class="r-stretch">
+					<aside class="notes">
+						Performance-Tests umfassen verschiedene Testarten, darunter Lasttests, Stress-Tests und
+						Ausdauer-
+						oder Dauertests. Jede dieser Testarten zielt darauf ab, unterschiedliche Leistungsaspekte
+						einer Anwendung zu bewerten. Zum Beispiel:
+
+						- Lasttests simulieren eine typische Nutzerbelastung, um zu sehen, wie die Anwendung unter
+						normalen
+						Bedingungen funktioniert.
+						- Stress-Tests erhöhen die Belastung schrittweise über das normale Niveau hinaus, um die Grenzen
+						der
+						Anwendung zu finden.
+						- Kapazitäts-Tests gehen mit Absicht über die Grenzen der Anwendung hinaus, um zu sehen, wie sie
+						scheitert.
+						- Ausdauer-Tests prüfen die Anwendung auf ihre Fähigkeit, über einen langen Zeitraum unter
+						erwarteter Belastung zuverlässig zu funktionieren.
+
+						Durch Performance-Tests können wir Engpässe identifizieren, die Leistung optimieren und
+						sicherstellen, dass unsere Anwendung auch unter Spitzenlast oder bei steigender Nutzerzahl
+						zuverlässig funktioniert. Mit diesem grundlegenden Verständnis von Performance-Tests können wir
+						nun
+						einen spezifischeren Blick auf Apache Jmeter werfen und verstehen, wie es uns unterstützt,
+						unsere Anwendungen zu testen.
+					</aside>
 				</section>
 			</section>
 			<section>
@@ -71,6 +146,39 @@
 						<li>Plugins</li>
 					</ul>
 					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
+					<aside class="notes">
+						Apache JMeter ist ein mächtiges Open-Source-Tool, das vorwiegend für Performance-Tests und
+						Lasttests von Anwendungen eingesetzt wird. Entwickelt in Java, bietet JMeter eine flexible
+						Plattform für die Bewertung der Leistung von Webanwendungen.
+
+						JMeter kann sowohl über eine grafische Benutzeroberfläche (GUI) als auch über die
+						Kommandozeilenschnittstelle (CLI) bedient zu werden. Während die GUI insbesondere während der
+						Testentwicklungsphase für ihre Benutzerfreundlichkeit und visuelle Rückmeldung geschätzt wird,
+						ermöglicht die CLI einen effizienteren Betrieb in Testumgebungen, was besonders bei der
+						Integration in CI/CD-Pipelines nützlich ist. Oder eben auch für eine Integration in
+						Cloud-Lösungen wie Azure Load Testing. Wir haben es auch in einer eigenen cloud-basierten
+						Lasttestlösung im Einsatz, QLoad.
+
+						JMeter zeichnet sich durch seine Skalierbarkeit aus. Es kann auf einzelnen Workstations für
+						einfache Testaufgaben eingesetzt werden, lässt sich aber auch in großem Umfang für komplexe
+						Lasttests verwenden, die mehrere Server umfassen können. Diese Skalierbarkeit macht es zu einem
+						idealen Werkzeug für Unternehmen jeder Größe, um die Leistung ihrer Anwendungen unter
+						verschiedenen Lastbedingungen zu bewerten.
+
+						Ein weiteres wichtiges Merkmal von JMeter sind die zahlreichen verfügbaren Plugins, die seine
+						Funktionalität erweitern. Diese Plugins ermöglichen es den Benutzern, neue Testfähigkeiten
+						hinzuzufügen, die Anpassung von Berichten zu verbessern und die Integration mit anderen Tools
+						und Plattformen zu vereinfachen. Obwohl JMeter bereits eine umfassende Palette an
+						Testmöglichkeiten bietet, erlauben es diese Plugins, das Tool noch weiter an spezifische
+						Bedürfnisse anzupassen. Die Entwicklung eigener Plugins ist ebenfalls möglich, was die
+						Flexibilität von JMeter zusätzlich erhöht.
+
+						Insgesamt bietet Apache JMeter als ein vielseitiges, leistungsstarkes Tool für
+						Performance-Testing und Lasttesting eine robuste Lösung für Entwickler und
+						Qualitätssicherungs-Teams. Seine Open-Source-Natur, gepaart mit umfangreicher Dokumentation und
+						einer aktiven Community, macht es zu einer zugänglichen und wertvollen Ressource für die
+						Optimierung der Leistung von Webanwendungen und anderen Diensten.
+					</aside>
 				</section>
 				<section>
 					<h2>Web-Applikation testen 🌐</h2>
@@ -78,7 +186,16 @@
 						<li>HTTP Request</li>
 						<li>Response Times</li>
 					</ul>
-					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
+					<aside class="notes">
+						Schauen wir uns nun an, wie wir mit JMeter eine einfache Web-Applikation testen können. Dazu
+						verwenden wir eine einfache Flask-App, die wir auf einem Azure Web App Service bereitstellen.
+						Diese App hat nur eine einzige Route, die wir mit einem Parameter aufrufen können, um eine
+						bestimmte Zeit zu warten. Das ist nützlich, um die Reaktionszeit der Anwendung zu testen.
+						und dadurch eine Art Last-Szenario zu simulieren. Wir tun also so, als ob viele Benutzer auf
+						diese Route zugreifen und die Anwendung dadurch unter Last steht und langsamer wird. Wir
+						werden sehen, wie wir mit JMeter eine solche Last erzeugen und die Reaktionszeiten messen
+						können.
+					</aside>
 				</section>
 				<section>
 					<pre class="r-stretch">
@@ -105,6 +222,7 @@
 					</pre>
 					<br>
 					<a href="https://qyterawebapp.azurewebsites.net/?sleep=2000" target="_blank">Open App 🎁</a>
+					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
 				</section>
 				<section>
 					<h2>JMeter skalieren ⚖️</h2>
@@ -115,10 +233,15 @@
 				<section data-background-gradient="linear-gradient(to bottom, black 50%, white 100%)">
 					<h2>Azure Load Testing 🧪</h2>
 					<ul>
-						<li>Cloud basiert</li>
+						<li>Cloud basiert --> kein Know-How von Infrastruktur oder IaC benötigt</li>
 						<li>Skalierbar</li>
+						<li>integrierte Analyse-Werkzeuge, daher kein Wissen über Time-Series DBs oder Grafana notwendig
+						</li>
+						<ul>
+							<li>Monitoring des Targets</li>
+							<li>und der eigenen Lastagenten</li>
+						</ul>
 						<li>Integration in Azure DevOps</li>
-						<li>Monitoring</li>
 					</ul>
 				</section>
 				<section data-background-color="white">
@@ -126,7 +249,15 @@
 					<img class="r-stretch" src="images/cloud-performance-testing.png" alt="Azure Load Testing">
 				</section>
 				<section data-background-gradient="linear-gradient(to bottom, white 0, black 50%)">
-					<h2>Kosten 🤑</h2>
+					<h2>Facts $ Money 🤑</h2>
+					<ul>
+						<li>bis zu 100.000 virtuelle User sind möglich</li>
+						<li>$0,15 pro VUH (Virtual User Hour), ab 9950 VUH nur noch $0,075</li>
+						<ul>
+							<li>1.000 User * 1 Stunde = 150€</li>
+							<li>10.000 User * 2 Stunde = 1.500€</li>
+						</ul>
+					</ul>
 				</section>
 				<section>
 					<h2>Hands-On 👐</h2>
@@ -139,7 +270,7 @@
 				</section>
 				<section>
 					<h2>Einbindung in Azure DevOps Pipelines 🔗</h2>
-					<img src="images/azure-devops.png" alt="Azure DevOps" style="width:20%">
+					<img src="images/pipeline.png" alt="Azure DevOps Pipeline" class="r-stretch">
 					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
 				</section>
 			</section>
