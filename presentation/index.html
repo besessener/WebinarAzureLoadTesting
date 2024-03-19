@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="dist/reveal.css">
 	<link rel="stylesheet" href="dist/theme/black.css">
 	<link rel="stylesheet" href="css/reveal-override.css" />
+	<link rel="stylesheet" href="plugin/pointer/pointer.css" />
 
 	<link rel="stylesheet" href="plugin/highlight/monokai.css">
 </head>
@@ -100,10 +101,8 @@
 						Performance-Tests sind ein entscheidender Aspekt der Softwareentwicklung, der sicherstellt, dass
 						eine Anwendung nicht nur die funktionalen Anforderungen erfüllt, sondern auch in Bezug auf
 						Geschwindigkeit, Stabilität und Skalierbarkeit unter verschiedenen Bedingungen leistungsfähig
-						ist.
-						Bevor wir uns dem spezifischen Thema Azure Load Testing zuwenden, ist es wichtig, einen
-						Überblick
-						über das Konzept des Performance-Testings zu geben.
+						ist. Bevor wir uns dem spezifischen Thema Azure Load Testing zuwenden, ist es wichtig, einen
+						Überblick über das Konzept des Performance-Testings zu geben.
 					</aside>
 				</section>
 				<section>
@@ -111,16 +110,13 @@
 					<img src="images/performance-tests-types.png" alt="Performance-Testing Arten" class="r-stretch">
 					<aside class="notes">
 						Performance-Tests umfassen verschiedene Testarten, darunter Lasttests, Stress-Tests und
-						Ausdauer-
-						oder Dauertests. Jede dieser Testarten zielt darauf ab, unterschiedliche Leistungsaspekte
-						einer Anwendung zu bewerten. Zum Beispiel:
+						Ausdauer- oder Dauertests. Jede dieser Testarten zielt darauf ab, unterschiedliche
+						Leistungsaspekte einer Anwendung zu bewerten. Zum Beispiel:
 
 						- Lasttests simulieren eine typische Nutzerbelastung, um zu sehen, wie die Anwendung unter
-						normalen
-						Bedingungen funktioniert.
+						normalen Bedingungen funktioniert.
 						- Stress-Tests erhöhen die Belastung schrittweise über das normale Niveau hinaus, um die Grenzen
-						der
-						Anwendung zu finden.
+						der Anwendung zu finden.
 						- Kapazitäts-Tests gehen mit Absicht über die Grenzen der Anwendung hinaus, um zu sehen, wie sie
 						scheitert.
 						- Ausdauer-Tests prüfen die Anwendung auf ihre Fähigkeit, über einen langen Zeitraum unter
@@ -129,8 +125,7 @@
 						Durch Performance-Tests können wir Engpässe identifizieren, die Leistung optimieren und
 						sicherstellen, dass unsere Anwendung auch unter Spitzenlast oder bei steigender Nutzerzahl
 						zuverlässig funktioniert. Mit diesem grundlegenden Verständnis von Performance-Tests können wir
-						nun
-						einen spezifischeren Blick auf Apache Jmeter werfen und verstehen, wie es uns unterstützt,
+						nun einen spezifischeren Blick auf Apache JMeter werfen und verstehen, wie es uns unterstützt,
 						unsere Anwendungen zu testen.
 					</aside>
 				</section>
@@ -174,7 +169,7 @@
 						Flexibilität von JMeter zusätzlich erhöht.
 
 						Insgesamt bietet Apache JMeter als ein vielseitiges, leistungsstarkes Tool für
-						Performance-Testing und Lasttesting eine robuste Lösung für Entwickler und
+						Performance-Testing und Lasttest eine robuste Lösung für Entwickler und
 						Qualitätssicherungs-Teams. Seine Open-Source-Natur, gepaart mit umfangreicher Dokumentation und
 						einer aktiven Community, macht es zu einer zugänglichen und wertvollen Ressource für die
 						Optimierung der Leistung von Webanwendungen und anderen Diensten.
@@ -230,48 +225,144 @@
 				</section>
 			</section>
 			<section>
-				<section data-background-gradient="linear-gradient(to bottom, black 50%, white 100%)">
+				<section>
 					<h2>Azure Load Testing 🧪</h2>
+					<p class="fragment">❓❓❓</p>
+					<aside class="notes">
+						Kommen wir endlich zum Hauptthema, dem Azure Load Testing. Aber was ist das eigentlich?
+						Dafür lese ich einfach mal die offizielle Dokumentation von Microsoft vor. Die ist ja oft
+						ziemlich gut und auf den Punkt.
+					</aside>
+				</section>
+				<section>
+					Quelle: Microsoft Azure Dokumentation
+					<blockquote class="r-stretch">
+						"Azure Load Testing ist ein vollständig verwalteter Auslastungstestdienst, mit dem Sie eine hohe
+						Auslastung generieren können. Der Dienst simuliert Datenverkehr für Ihre Anwendungen, unabhängig
+						davon, wo sie gehostet werden. Fachkräfte in der Entwicklung und Qualitätssicherung sowie
+						Tester*innen können damit die Leistung, Skalierbarkeit oder Kapazität einer Anwendung
+						optimieren."
+					</blockquote>
+				</section>
+				<section>
+					<blockquote class="r-stretch">
+						"Erstellen Sie schnell einen Auslastungstest für Ihre Webanwendung mithilfe einer URL und ohne
+						vorherige Kenntnisse von Testtools. Azure Load Testing abstrahiert Komplexität und
+						Infrastruktur, um Ihre Auslastungstests nach Maß durchzuführen."
+					</blockquote>
+				</section>
+				<section>
+					<blockquote class="r-stretch">
+						"Für komplexere Auslastungstestszenarien können Sie einen Auslastungstest erstellen, indem Sie
+						ein vorhandenes Apache JMeter-Testskript, ein beliebtes Open-Source-Tool für Auslastung und
+						Leistung, wiederverwenden. Ihr Testplan kann beispielsweise aus mehreren Anwendungsanforderungen
+						bestehen, Sie möchten Nicht-HTTP-Endpunkte aufrufen, oder Sie verwenden Eingabedaten und
+						Parameter, um den Test dynamischer zu gestalten."
+					</blockquote>
+				</section>
+				<section>
+					<blockquote class="r-stretch">
+						"Wenn Ihre Anwendung auf Azure gehostet wird, sammelt Azure Load Testing detaillierte
+						Ressourcenmetriken, die Ihnen helfen, Leistungsengpässe bei Ihren Azure-Anwendungskomponenten zu
+						erkennen."
+					</blockquote>
+				</section>
+				<section>
+					<blockquote class="r-stretch">
+						"Um Regressionen in der Anwendungsleistung frühzeitig zu erfassen, fügen Sie Ihren
+						Auslastungstest zu Ihrem Continuous Integration und Continuous Deployment (CI/CD)-Workflow
+						hinzu. Nutzen Sie die Kriterien für das Scheitern von Tests, um die Qualitätsanforderungen Ihrer
+						Anwendung zu definieren und zu validieren."
+					</blockquote>
+				</section>
+				<section data-background-gradient="linear-gradient(to bottom, black 50%, white 100%)">
+					<h2>Vorteile 🚀</h2>
 					<ul>
-						<li>Cloud basiert --> kein Know-How von Infrastruktur oder IaC benötigt</li>
-						<li>Skalierbar</li>
-						<li>integrierte Analyse-Werkzeuge, daher kein Wissen über Time-Series DBs oder Grafana notwendig
-						</li>
-						<ul>
-							<li>Monitoring des Targets</li>
-							<li>und der eigenen Lastagenten</li>
-						</ul>
+						<li>Cloud basiert: kein Know-How von Infrastruktur oder IaC benötigt (SaaS)</li>
+						<li>Einfache Tests ohne Tool-Know-How sind möglich</li>
+						<li>JMeter für komplexe Szenarien (skalierbar)</li>
+						<li>integrierte Analyse-Werkzeuge</li>
 						<li>Integration in Azure DevOps</li>
 					</ul>
+					<aside class="notes">
+						Und jetzt das ganze nochmal zusammengefasst auf diese 5 Punkte:
+						Der Dienst ist vollständig in der Cloud gehostet, was bedeutet, dass
+						kein spezifisches Know-how in Bezug auf Infrastruktur oder Infrastructure as Code (IaC)
+						erforderlich ist. Es handelt sich um eine Software as a Service (SaaS)-Lösung, die einfach zu
+						bedienen und zugänglich ist.
+
+						Darüber hinaus ermöglicht Azure Load Testing es Testern, Lasttests für die Entwicklung und
+						Qulaitätsicherung zu nutzen. Der Dienst abstrahiert die Komplexität und Infrastruktur, um
+						Lasttests nach Maß durchzuführen. Und Ergebnisse können in integrierten Analyse-Werkzeugen
+						visualisiert und analysiert werden.
+					</aside>
 				</section>
 				<section data-background-color="white">
 					<h2>Architektur 🏛️🛕</h2>
 					<img class="r-stretch" src="images/cloud-performance-testing.png" alt="Azure Load Testing">
+					<aside class="notes">
+						Die Architektur von Azure Load Testing ist relativ einfach. Zunächst muss ich mich entscheiden
+						einen einfachen Test durchzuführen oder einen komplexen. Für den einfachen wird einfach nur eine
+						Website aufgerufen. Dafür erzeugt Azure Load Testing automatisch selbst ein JMeter Script.
+						Ansonsten muss ich selbst eins hochladen. Dieses JMeter Script wird dann auf mehrere Runner
+						verteilt, die Anzahl kann ich selbst festlegen. Die Runner sind virtuelle Maschinen, die die
+						Last auf die Anwendung, rechts, ausüben, in dem sie jeweils das JMeter Script ausführen. Die
+						Ergebnisse werden dann in Azure Monitor gespeichert und können im Azure Load Testing dashboard
+						analysiert werden.
+					</aside>
 				</section>
 				<section data-background-gradient="linear-gradient(to bottom, white 0, black 50%)">
-					<h2>Facts $ Money 🤑</h2>
+					<h2>Kosten 🤑</h2>
 					<ul>
 						<li>bis zu 100.000 virtuelle User sind möglich</li>
 						<li>$0,15 pro VUH (Virtual User Hour), ab 9950 VUH nur noch $0,075</li>
 						<ul>
 							<li>1.000 User * 1 Stunde = 150€</li>
-							<li>10.000 User * 2 Stunde = 1.500€</li>
+							<li>10.000 User * 2 Stunde = 9950 * 0.15 + 10.050 * 0.075 = 2246,25</li>
 						</ul>
 					</ul>
+					<aside class="notes">Bei Cloud-Diensten wird häufig auch die Frage nach den Kosten gestellt. Deshalb
+						darf das auch in dieser Präsentation nicht fehlen, auch wenn ich es nur erwähnen will und nicht
+						im Detail darauf eingehen werde. Aber ich finde es wichtig zu wissen.
+						Also, die Kosten für Azure Load Testing sind relativ einfach zu verstehen. Es gibt eine
+						Preisstaffelung, die sich an der Anzahl der virtuellen Benutzerstunden (VUH) orientiert. Bis zu
+						9.950 VUH kostet eine Stunde 15 Cent pro VUH. Ab 9.950 VUH sinkt der Preis auf 7,5 Cent pro VUH.
+						Das bedeutet, dass 1.000 virtuelle Benutzer, die eine Stunde lang eine Last auf eine Anwendung
+						ausüben, 150€ kosten. Bei 10.000 virtuellen Benutzern, die zwei Stunden lang eine Last auf eine
+						Anwendung ausüben, also 20.000 VUH, kostet das 2246,25€.
+						Insgesamt können so bis zu 100.000 virtuelle Benutzer gleichzeitig auf eine Anwendung zugreifen.
+					</aside>
 				</section>
 				<section>
 					<h2>Hands-On 👐</h2>
 					<ul>
-						<li>Erstellung eines Tests</li>
+						<li>Erstellung eines (einfachen) Tests</li>
 						<li>Skalierung</li>
 						<li>Monitoring</li>
 					</ul>
 					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
+					<aside class="notes">
+						Und jetzt kommen wir zum spannenden Teil, dem Hands-On. Ich werde euch zeigen wie
+						Azure Load Testing funktioniert. Wir testen wieder die bereits bestehende, einfache Python
+						Anwendung. Nur dieses mal aus der Cloud. Zunächst erstellen wir einen sehr einfachen Test, noch
+						völlig ohne JMeter, dann fügen wir unser zuvor angeschautes JMeter Script hoch und führen es
+						aus. Anschließend schauen wir uns die Ergebnisse an und wie wir das Monitoring nutzen können.
+					</aside>
 				</section>
 				<section>
 					<h2>Einbindung in Azure DevOps Pipelines 🔗</h2>
 					<img src="images/pipeline.png" alt="Azure DevOps Pipeline" class="r-stretch">
 					<span class="videoTrigger" data-video-src="videos/workspaceEnvs.mp4">🎦</span>
+				</section>
+				<section>
+					<h2>Aufräumen 🗑️</h2>
+					<aside class="notes">
+						Am Ende eines solchen Tests ist es wichtig, die Ressourcen wieder zu bereinigen. Das ist
+						insbesondere in der Cloud wichtig, da sonst Kosten entstehen können. Ich habe hierfür wieder ein
+						Script vorbereitet, das ich jetzt einfach starte. Das könnt ihr in eurer Umgebung natürlich
+						genauso verwenden. Sollten die Tests dauerhaft oder kontinuierlich durchgeführt werden, können
+						die Ressourcen auch bestehen bleiben. Was hiervon wirklich Kosten verursacht, wenn es nicht
+						benutzt wird, müsst ihr dann aber selbst überprüfen.
 				</section>
 			</section>
 			<section>
@@ -281,6 +372,17 @@
 					<li>Microsoft Azure Load Testing ist eine gute Ergänzung</li>
 					<li>Azure DevOps macht das Setup komplett</li>
 				</ul>
+				<aside class="notes">
+					Und damit komme ich auch schon zum Ende meiner Präsentation. Ich hoffe, ich konnte euch einen
+					guten Einblick in das Thema Performancetesting mit Microsoft Azure Load Testing geben.
+					Durchleuchten wir die Punkte noch einmal kurz: Ich denke,
+					dass Apache JMeter ein mächtiges Tool ist, das viele Anwendungsfälle abdeckt. Aber es ist auch
+					schön zu sehen, dass es mit Azure Load Testing eine gute Ergänzung gibt, die es ermöglicht, auch
+					größere Lasttests einfach und effizient durchzuführen. Und mit Azure DevOps ist das Setup dann
+					komplett, um die Tests automatisiert und regelmäßig durchzuführen. Vielen Dank für eure
+					Aufmerksamkeit.
+					Die restliche zeit können wir jetzt sehr gern für Fragen nutzen.
+				</aside>
 			</section>
 		</div>
 	</div>
@@ -290,11 +392,22 @@
 	<script src="plugin/markdown/markdown.js"></script>
 	<script src="plugin/highlight/highlight.js"></script>
 	<script src="plugin/video-popup/video-popup.js"></script>
+	<script src="plugin/pointer/pointer.js"></script>
+	<script src="plugin/zoom/zoom.js"></script>
+	<script src="plugin/search/search.js"></script>
 	<script>
 		Reveal.initialize({
+			pointer: {
+				key: "q", // key to enable pointer, default "q", not case-sensitive
+				color: "red", // color of a cursor, default "red" any valid CSS color
+				opacity: 0.8, // opacity of cursor, default 0.8
+				pointerSize: 30, // pointer size in px, default 12
+				alwaysVisible: false, // should pointer mode be always visible? default "false"
+				tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
+			},
 			slideNumber: 'c/t',
 			hash: true,
-			plugins: [RevealHighlight, RevealNotes]
+			plugins: [RevealHighlight, RevealNotes, RevealPointer, RevealZoom, RevealSearch]
 		});
 	</script>
 </body>
