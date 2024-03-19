@@ -4,7 +4,7 @@ document.querySelectorAll(".videoTrigger").forEach((item) => {
     let videoContainer = document.createElement("div");
     videoContainer.innerHTML = `
         <div class="videoContainer" style="display: block;">
-          <video controls class="r-stretch" autoplay>
+          <video controls class="r-stretch" autoplay muted>
             <source src="${videoSource}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
