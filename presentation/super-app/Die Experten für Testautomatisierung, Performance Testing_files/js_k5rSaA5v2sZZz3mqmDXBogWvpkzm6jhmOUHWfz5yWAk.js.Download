@@ -1,0 +1,178 @@
+(function ($) {
+
+Drupal.jQueryUiFilter = Drupal.jQueryUiFilter || {}
+
+/**
+ * Custom hash change event handling
+ */
+var _currentHash = location.hash;
+Drupal.jQueryUiFilter.hashChange = function(func) {
+  // Handle URL anchor change event in js
+  // http://stackoverflow.com/questions/2161906/handle-url-anchor-change-event-in-js
+  if ('onhashchange' in window) {
+    $(window).bind('hashchange', func);
+  }
+  else {
+    window.setInterval(function () {
+      if (location.hash != _currentHash) {
+        _currentHash = location.hash;
+        func();
+      }
+    }, 100);
+  }
+}
+
+
+/**
+ * Apply jQuery UI filter widget options as the global default options.
+ */
+Drupal.jQueryUiFilter.globalOptions = function(widgetType) {
+  Drupal.jQueryUiFilter.cleanupOptions(jQuery.extend(
+    $.ui[widgetType].prototype.options,
+    Drupal.settings.jQueryUiFilter[widgetType + 'Options'],
+    Drupal.jQueryUiFilter[widgetType + 'Options']
+  ));
+}
+
+/**
+ * Get jQuery UI filter widget options.
+ */
+Drupal.jQueryUiFilter.getOptions = function(widgetType, options) {
+  return Drupal.jQueryUiFilter.cleanupOptions(jQuery.extend(
+    {}, // Using an empty object insures that new object is created and returned.
+    Drupal.settings.jQueryUiFilter[widgetType + 'Options'],
+    Drupal.jQueryUiFilter[widgetType + 'Options'],
+    options || {}
+  ));
+}
+
+/**
+ * Cleanup jQuery UI filter options by converting 'true' and 'false' strings to native JavaScript Boolean value.
+ */
+Drupal.jQueryUiFilter.cleanupOptions = function(options) {
+  // jQuery UI options that are Booleans must be converted from integers booleans
+  for (var name in options) {
+    if (typeof(options[name]) == 'string' && options[name] == '') {
+      delete options[name];
+    }
+    else if (options[name] == 'false') {
+      options[name] = false;
+    }
+    else if (options[name] === 'true') {
+      options[name] = true;
+    }
+    else if (name === 'position' && options[name].indexOf(',') != -1) {
+      options[name] = options[name].split(/\s*,\s*/);
+    }
+    else if (typeof(options[name]) == 'object') {
+      options[name] = Drupal.jQueryUiFilter.cleanupOptions(options[name]);
+    }
+  }
+  return options;
+}
+
+})(jQuery);
+;
+
+/**
+ * @file
+ * Attaches the behaviors for the Scroll to Destination Anchors module.
+ */
+
+// Prevent script conflicts and attach the behavior.
+(function($) {
+  Drupal.behaviors.scrolltoanchors = {
+    attach: function(context, settings) {
+
+      // Wait until after the window has loaded.
+      $(window).load(function(){
+
+        // Utility to check if a string is a valid selector.
+        function validateSelector(a) {
+          return /^#[a-z]{1}[a-z0-9_-]*$/i.test(a);
+        }
+
+        // Utility to scroll users to particular destination on the page.
+        function scrollToDestination(a, b) {
+          if (a > b) {
+            destination = b;
+          } else {
+            destination = a;
+          }
+          var movement = 'scroll mousedown DOMMouseScroll mousewheel keyup';
+          $('html, body').animate({scrollTop: destination}, 500, 'swing').bind(movement, function(){
+            $('html, body').stop();
+          });
+        }
+
+        // When a user clicks on a link that starts with a hashtag.
+        $('a[href^="#"]', context).click(function(event) {
+
+          // Store important values.
+          var hrefValue = $(this).attr('href');
+          var strippedHref = hrefValue.replace('#','');
+          var heightDifference = $(document).height() - $(window).height();
+
+          // Make sure that the link value is a valid selector.
+          if (validateSelector(hrefValue)) {
+
+            // Scroll users if there is an element with a corresponding id.
+            if ($(hrefValue).length > 0) {
+              var linkOffset = $(this.hash).offset().top;
+              scrollToDestination(linkOffset, heightDifference);
+            }
+
+            // Scroll users if there is a link with a corresponding name.
+            else if ($('a[name=' + strippedHref + ']').length > 0) {
+              var linkOffset = $('a[name=' + strippedHref + ']').offset().top;
+              scrollToDestination(linkOffset, heightDifference);
+            }
+
+            // Add the href value to the URL.
+            document.location.hash = strippedHref;
+
+          }
+
+          // Prevent the event's default behavior.
+          event.preventDefault();
+
+        });
+
+      });
+
+    }
+  };
+}(jQuery));
+;
+(function ($) {
+	Drupal.behaviors.backtotop = {
+		attach: function(context) {
+			var exist= jQuery('#backtotop').length;
+      if(exist == 0) {
+        $("body", context).once(function() {
+          $(this).append("<button id='backtotop'>"+Drupal.t(Drupal.settings.back_to_top.back_to_top_button_text)+"</button>");
+        });
+      }
+			$(window).scroll(function() {
+				if($(this).scrollTop() > Drupal.settings.back_to_top.back_to_top_button_trigger) {
+					$('#backtotop').fadeIn();
+				} else {
+					$('#backtotop').stop(true).fadeOut();
+				}
+			});
+
+      $('#backtotop', context).once(function() {
+			  $(this).click(function() {
+			    $("html, body").bind("scroll mousedown DOMMouseScroll mousewheel keyup", function() {
+            $('html, body').stop();
+          });
+          $('html,body').animate({ scrollTop: 0 }, 1200, 'easeOutQuart', function() {
+            $("html, body").unbind("scroll mousedown DOMMouseScroll mousewheel keyup");
+          });
+          return false;
+			  });
+			});
+		}
+	};
+})(jQuery);
+;

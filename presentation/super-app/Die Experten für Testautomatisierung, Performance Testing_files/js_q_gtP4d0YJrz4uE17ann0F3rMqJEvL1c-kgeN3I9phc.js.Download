@@ -1,0 +1,257 @@
+(function ($) {
+  /**
+   * In most instances this will be called using the built in theme settings.
+   * However, if you want to use this manually you can call this file
+   * in the info file and user the ready function e.g.:
+   * 
+   * This will set sidebars and the main content column all to equal height:
+   *  (function ($) {
+   *    Drupal.behaviors.adaptivetheme = {
+   *      attach: function(context) {
+   *        $('#content-column, .sidebar').equalHeight();
+   *      }
+   *    };
+   *  })(jQuery);
+   */
+  jQuery.fn.equalHeight = function () {
+    var height = 0;
+    var maxHeight = 0;
+
+    // Store the tallest element's height
+    this.each(function () {
+      height = jQuery(this).outerHeight();
+      maxHeight = (height > maxHeight) ? height : maxHeight;
+    });
+
+    // Set element's min-height to tallest element's height
+    return this.each(function () {
+      var t = jQuery(this);
+      var minHeight = maxHeight - (t.outerHeight() - t.height());
+      var property = jQuery.browser.msie && jQuery.browser.version < 7 ? 'height' : 'min-height';
+
+      t.css(property, minHeight + 'px');
+   });
+  };
+
+})(jQuery);;
+(function ($) {
+  Drupal.behaviors.ategp = {
+    attach: function(context) {
+      $('#bi-panel .block-content').equalHeight();
+      $('#tri-panel .block-content').equalHeight();
+      $('#tri-panel-2 .block-content').equalHeight();
+      $('#quad-panel .block-content').equalHeight();
+      $('.four-4x25 .block-content').equalHeight();
+    }
+  };
+})(jQuery);
+;
+// Initialize and add the map
+function initMap() {
+  // The location of Qytera
+  var qytera = {lat: 50.111134, lng: 8.709959};
+  // The map, centered at Qytera
+  var map = new google.maps.Map(
+      document.getElementById('map'), {
+          zoom: 15, 
+          center: qytera,
+          styles: [
+            {
+              "featureType": "landscape.man_made",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#ecf2e6"
+                }
+              ]
+            },
+            {
+              "featureType": "landscape.natural",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#ecf2e6"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#d0e18e"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#dae5cd"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#c0c0c0"
+                }
+              ]
+            },
+            {
+              "featureType": "transit",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#627d77"
+                }
+              ]
+            }
+          ]
+      });
+  //custom icon
+  // var image = {url: 'img/maps/qytera-map-marker.png',
+    var image = {url: 'https://www.qytera.de/sites/default/files/qytera.ico',
+    // The anchor for this image
+    anchor: new google.maps.Point(5, 12)};
+  
+    var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<p id="firstHeading" class="firstHeading"><strong>Qytera Software Testing Solutions GmbH</strong></p>'+
+      '<div id="bodyContent">'+
+      '<p>Hanauer Landstraße 114,</p>' +
+      '<p>60314 Frankfurt am Main</p>' +
+      '<a class="maps-route-ermitteln" href="https://www.google.de/maps/place/Qytera+Software+Testing+Solutions+GmbH/@50.1111234,8.707766,17z/data=!3m1!4b1!4m5!3m4!1s0x47bd0fa07a1e0d13:0x2e6bcd87370c418!8m2!3d50.11112!4d8.70996?hl=de&authuser=0" target="_blank">'+
+      'Route ermitteln</a> '+
+      '</div>'+
+      '</div>';
+
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+
+    // The marker, positioned at Qytera
+  var marker = new google.maps.Marker({position: qytera, map: map, icon: image});
+
+  marker.addListener('click', function() {
+    infowindow.open(map, marker);
+  });
+
+  infowindow.open(map,marker);
+}
+
+
+
+//Modal / Pop-up Bilder
+
+// Get modal1
+var modal = document.getElementById("modal1");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("popup-img1");
+var modalImg = document.getElementById("modal-img1");
+var captionText = document.getElementById("caption1");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Get modal2
+var modal2 = document.getElementById("modal2");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img2 = document.getElementById("popup-img2");
+var modal2Img = document.getElementById("modal-img2");
+var caption2Text = document.getElementById("caption2");
+img2.onclick = function(){
+  modal2.style.display = "block";
+  modal2Img.src = this.src;
+  caption2Text.innerHTML = this.alt;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close2")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal2.style.display = "none";
+}
+
+// Get modal3
+var modal3 = document.getElementById("modal3");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img3= document.getElementById("popup-img3");
+var modal3Img = document.getElementById("modal-img3");
+var caption3Text = document.getElementById("caption3");
+img3.onclick = function(){
+  modal3.style.display = "block";
+  modal3Img.src = this.src;
+  caption3Text.innerHTML = this.alt;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close3")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal3.style.display = "none";
+}
+
+// Get modal4
+var modal4 = document.getElementById("modal4");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img4 = document.getElementById("popup-img4");
+var modal4Img = document.getElementById("modal-img4");
+var caption4Text = document.getElementById("caption4");
+img4.onclick = function(){
+  modal4.style.display = "block";
+  modal4Img.src = this.src;
+  caption4Text.innerHTML = this.alt;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close4")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal4.style.display = "none";
+}
+
+// Get modal5
+var modal5 = document.getElementById("modal5");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img5 = document.getElementById("popup-img5");
+var modal5Img = document.getElementById("modal-img5");
+var caption5Text = document.getElementById("caption5");
+img5.onclick = function(){
+  modal5.style.display = "block";
+  modal5Img.src = this.src;
+  caption5Text.innerHTML = this.alt;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close5")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal5.style.display = "none";
+}
+
+// Get modal6
+var modal6 = document.getElementById("modal6");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img6 = document.getElementById("popup-img6");
+var modal6Img = document.getElementById("modal-img6");
+var caption6Text = document.getElementById("caption6");
+img6.onclick = function(){
+  modal6.style.display = "block";
+  modal6Img.src = this.src;
+  caption6Text.innerHTML = this.alt;
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close6")[0];
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal6.style.display = "none";
+};

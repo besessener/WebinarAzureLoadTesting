@@ -1,0 +1,1070 @@
+Drupal.locale = { 'pluralFormula': function ($n) { return Number(($n!=1)); }, 'strings': {"":{"An AJAX HTTP error occurred.":"Ein AJAX-HTTP-Fehler ist aufgetreten","HTTP Result Code: !status":"HTTP-R\u00fcckgabe-Code: !status","An AJAX HTTP request terminated abnormally.":"Eine AJAX-Anfrage ist abnormal beendet worden.","Debugging information follows.":"Im Folgenden finden Sie Debugging-Informationen.","Path: !uri":"Pfad: !uri","StatusText: !statusText":"Statustext: !statusText","ResponseText: !responseText":"Antworttext: !responseText","ReadyState: !readyState":"ReadyState: !readyState","Loading":"Laden","(active tab)":"(aktiver Reiter)","Hide":"Ausblenden","Show":"Anzeigen","@title dialog":"@title Dialog","Configure":"Konfigurieren","Show shortcuts":"Tastaturkombinationen anzeigen","Hide shortcuts":"Shortcuts ausblenden","Disabled":"Deaktiviert","Enabled":"Aktiviert","Edit":"Bearbeiten","None":"Keine","Top":"Oben","Add":"Hinzuf\u00fcgen","Upload":"Upload","Done":"Schlie\u00dfen","Bottom":"Unten","1 hour":"1 Stunde","@count hours":"@count Stunden","1 day":"1 Tag","@count days":"@count Tage","Select all rows in this table":"Alle Zeilen dieser Tabelle ausw\u00e4hlen","Deselect all rows in this table":"Alle Zeilen dieser Tabelle abw\u00e4hlen","Not published":"Nicht ver\u00f6ffentlicht","Please wait...":"Bitte warten...","1 year":"1 Jahr","@count years":"@count Jahre","1 week":"1 Woche","@count weeks":"@count Wochen","1 min":"1 Minute","@count min":"@count Minuten","1 sec":"1 Sekunde","@count sec":"@count Sekunden","1 month":"1 Monat","@count months":"@count Monate","Only files with the following extensions are allowed: %files-allowed.":"Nur Dateien mit folgenden Erweiterungen sind zul\u00e4ssig: %files-allowed.","By @name on @date":"Von @name am @date","By @name":"Von @name","Not in menu":"Nicht im Men\u00fc","Alias: @alias":"Alias: @alias","No alias":"Kein Alias","0 sec":"0 Sek.","New revision":"Neue Version","Drag to re-order":"Ziehen um die Reihenfolge zu \u00e4ndern","Changes made in this table will not be saved until the form is submitted.":"\u00c4nderungen in dieser Tabelle werden nicht gespeichert, bis dieses Formular abgesendet wurde.","The changes to these blocks will not be saved until the \u003Cem\u003ESave blocks\u003C\/em\u003E button is clicked.":"Die \u00c4nderungen an diesen Bl\u00f6cken werden nicht gespeichert, bis auf dem \u003Cem\u003EBl\u00f6cke speichern\u003C\/em\u003E-Button geklickt wurde.","This permission is inherited from the authenticated user role.":"Diese Berechtigung wird von der Rolle \u201aAuthentifizierte Benutzer\u2018 ererbt.","No revision":"Keine Version","@number comments per page":"@number Kommentare pro Seite","Requires a title":"Ben\u00f6tigt einen Titel","Not restricted":"Uneingeschr\u00e4nkt","Not customizable":"Nicht anpassbar","Restricted to certain pages":"Auf bestimmte Seiten eingeschr\u00e4nkt","The block cannot be placed in this region.":"Der Block kann nicht in dieser Region abgelegt werden.","Customize dashboard":"Dashboard anpassen","Hide summary":"Zusammenfassung verbergen","Edit summary":"Zusammenfassung bearbeiten","Don\u0027t display post information":"Beitragsinformationen nicht anzeigen","The selected file %filename cannot be uploaded. Only files with the following extensions are allowed: %extensions.":"Die ausgew\u00e4hlte Datei %filename konnte nicht gespeichert werden. Nur Dateien mit den folgenden Erweiterungen sind zul\u00e4ssig: %extensions.","Re-order rows by numerical weight instead of dragging.":"Zeilen mittels numerischer Gewichtung ordnen statt mit Drag-and-Drop","Show row weights":"Zeilenreihenfolge anzeigen","Hide row weights":"Zeilenreihenfolge ausblenden","Autocomplete popup":"Popup zur automatischen Vervollst\u00e4ndigung","Searching for matches...":"Suche \u2026"}} };;
+/**
+* hoverIntent r6 // 2011.02.26 // jQuery 1.5.1+
+* <http://cherne.net/brian/resources/jquery.hoverIntent.html>
+* 
+* @param  f  onMouseOver function || An object with configuration options
+* @param  g  onMouseOut function  || Nothing (use configuration options object)
+* @author    Brian Cherne brian(at)cherne(dot)net
+*/
+(function($){$.fn.hoverIntent=function(f,g){var cfg={sensitivity:7,interval:100,timeout:0};cfg=$.extend(cfg,g?{over:f,out:g}:f);var cX,cY,pX,pY;var track=function(ev){cX=ev.pageX;cY=ev.pageY};var compare=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);if((Math.abs(pX-cX)+Math.abs(pY-cY))<cfg.sensitivity){$(ob).unbind("mousemove",track);ob.hoverIntent_s=1;return cfg.over.apply(ob,[ev])}else{pX=cX;pY=cY;ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}};var delay=function(ev,ob){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t);ob.hoverIntent_s=0;return cfg.out.apply(ob,[ev])};var handleHover=function(e){var ev=jQuery.extend({},e);var ob=this;if(ob.hoverIntent_t){ob.hoverIntent_t=clearTimeout(ob.hoverIntent_t)}if(e.type=="mouseenter"){pX=ev.pageX;pY=ev.pageY;$(ob).bind("mousemove",track);if(ob.hoverIntent_s!=1){ob.hoverIntent_t=setTimeout(function(){compare(ev,ob)},cfg.interval)}}else{$(ob).unbind("mousemove",track);if(ob.hoverIntent_s==1){ob.hoverIntent_t=setTimeout(function(){delay(ev,ob)},cfg.timeout)}}};return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover)}})(jQuery);;
+/* Copyright (c) 2010 Brandon Aaron (http://brandonaaron.net)
+ * Licensed under the MIT License (LICENSE.txt).
+ *
+ * Version 2.1.2
+ */
+(function(a){a.fn.bgiframe=(a.browser.msie&&/msie 6\.0/i.test(navigator.userAgent)?function(d){d=a.extend({top:"auto",left:"auto",width:"auto",height:"auto",opacity:true,src:"javascript:false;"},d);var c='<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+d.src+'"style="display:block;position:absolute;z-index:-1;'+(d.opacity!==false?"filter:Alpha(Opacity='0');":"")+"top:"+(d.top=="auto"?"expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+'px')":b(d.top))+";left:"+(d.left=="auto"?"expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+'px')":b(d.left))+";width:"+(d.width=="auto"?"expression(this.parentNode.offsetWidth+'px')":b(d.width))+";height:"+(d.height=="auto"?"expression(this.parentNode.offsetHeight+'px')":b(d.height))+';"/>';return this.each(function(){if(a(this).children("iframe.bgiframe").length===0){this.insertBefore(document.createElement(c),this.firstChild)}})}:function(){return this});a.fn.bgIframe=a.fn.bgiframe;function b(c){return c&&c.constructor===Number?c+"px":c}})(jQuery);;
+/*
+ * Superfish v1.4.8 - jQuery menu widget
+ * Copyright (c) 2008 Joel Birch
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ * CHANGELOG: http://users.tpg.com.au/j_birch/plugins/superfish/changelog.txt
+ */
+
+(function($){
+  $.fn.superfish = function(op){
+    var sf = $.fn.superfish,
+      c = sf.c,
+      $arrow = $(['<span class="',c.arrowClass,'"> &#187;</span>'].join('')),
+      over = function(){
+        var $$ = $(this), menu = getMenu($$);
+        clearTimeout(menu.sfTimer);
+        $$.showSuperfishUl().siblings().hideSuperfishUl();
+      },
+      out = function(){
+        var $$ = $(this), menu = getMenu($$), o = sf.op;
+        clearTimeout(menu.sfTimer);
+        menu.sfTimer=setTimeout(function(){
+          o.retainPath=($.inArray($$[0],o.$path)>-1);
+          $$.hideSuperfishUl();
+          if (o.$path.length && $$.parents(['li.',o.hoverClass].join('')).length<1){over.call(o.$path);}
+        },o.delay);
+      },
+      getMenu = function($menu){
+        var menu = $menu.parents(['ul.',c.menuClass,':first'].join(''))[0];
+        sf.op = sf.o[menu.serial];
+        return menu;
+      },
+      addArrow = function($a){ $a.addClass(c.anchorClass).append($arrow.clone()); };
+
+    return this.each(function() {
+      var s = this.serial = sf.o.length;
+      var o = $.extend({},sf.defaults,op);
+      o.$path = $('li.'+o.pathClass,this).slice(0,o.pathLevels).each(function(){
+        $(this).addClass([o.hoverClass,c.bcClass].join(' '))
+          .filter('li:has(ul)').removeClass(o.pathClass);
+      });
+      sf.o[s] = sf.op = o;
+
+      $('li:has(ul)',this)[($.fn.hoverIntent && !o.disableHI) ? 'hoverIntent' : 'hover'](over,out).each(function() {
+        if (o.autoArrows) addArrow( $('>a:first-child',this) );
+      })
+      .not('.'+c.bcClass)
+        .hideSuperfishUl();
+
+      var $a = $('a',this);
+      $a.each(function(i){
+        var $li = $a.eq(i).parents('li');
+        $a.eq(i).focus(function(){over.call($li);}).blur(function(){out.call($li);});
+      });
+      o.onInit.call(this);
+
+    }).each(function() {
+      var menuClasses = [c.menuClass];
+      if (sf.op.dropShadows  && !($.browser.msie && $.browser.version < 7)) menuClasses.push(c.shadowClass);
+      $(this).addClass(menuClasses.join(' '));
+    });
+  };
+
+  var sf = $.fn.superfish;
+  sf.o = [];
+  sf.op = {};
+  sf.IE7fix = function(){
+    var o = sf.op;
+    if ($.browser.msie && $.browser.version > 6 && o.dropShadows && o.animation.opacity!=undefined)
+      this.toggleClass(sf.c.shadowClass+'-off');
+    };
+  sf.c = {
+    bcClass: 'sf-breadcrumb',
+    menuClass: 'sf-js-enabled',
+    anchorClass: 'sf-with-ul',
+    arrowClass: 'sf-sub-indicator',
+    shadowClass: 'sf-shadow'
+  };
+  sf.defaults = {
+    hoverClass: 'sfHover',
+    pathClass: 'overideThisToUse',
+    pathLevels: 1,
+    delay: 800,
+    animation: {opacity:'show'},
+    speed: 'normal',
+    autoArrows: true,
+    dropShadows: true,
+    disableHI: false, // true disables hoverIntent detection
+    onInit: function(){}, // callback functions
+    onBeforeShow: function(){},
+    onShow: function(){},
+    onHide: function(){}
+  };
+  $.fn.extend({
+    hideSuperfishUl : function(){
+      var o = sf.op,
+        not = (o.retainPath===true) ? o.$path : '';
+      o.retainPath = false;
+      var $ul = $(['li.',o.hoverClass].join(''),this).add(this).not(not).removeClass(o.hoverClass)
+          .find('>ul').hide().css('visibility','hidden');
+      o.onHide.call($ul);
+      return this;
+    },
+    showSuperfishUl : function(){
+      var o = sf.op,
+        sh = sf.c.shadowClass+'-off',
+        $ul = this.addClass(o.hoverClass)
+          .find('>ul:hidden').css('visibility','visible');
+      sf.IE7fix.call($ul);
+      o.onBeforeShow.call($ul);
+      $ul.animate(o.animation,o.speed,function(){ sf.IE7fix.call($ul); o.onShow.call($ul); });
+      return this;
+    }
+  });
+})(jQuery);;
+/*
+ * Supersubs v0.2b - jQuery plugin - LAST UPDATE: MARCH 23rd, 2011
+ * Copyright (c) 2008 Joel Birch
+ *
+ * Jan 16th, 2011 - Modified a little in order to work with NavBar menus as well.
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ * This plugin automatically adjusts submenu widths of suckerfish-style menus to that of
+ * their longest list item children. If you use this, please expect bugs and report them
+ * to the jQuery Google Group with the word 'Superfish' in the subject line.
+ *
+ */
+
+(function($){ // $ will refer to jQuery within this closure
+
+  $.fn.supersubs = function(options){
+    var opts = $.extend({}, $.fn.supersubs.defaults, options);
+	// return original object to support chaining
+    return this.each(function() {
+      // cache selections
+      var $$ = $(this);
+      // support metadata
+      var o = $.meta ? $.extend({}, opts, $$.data()) : opts;
+      // get the font size of menu.
+      // .css('fontSize') returns various results cross-browser, so measure an em dash instead
+      var fontsize = $('<li id="menu-fontsize">&#8212;</li>').css({
+        'padding' : 0,
+        'position' : 'absolute',
+        'top' : '-99999em',
+        'width' : 'auto'
+      }).appendTo($$).width(); //clientWidth is faster, but was incorrect here
+      // remove em dash
+      $('#menu-fontsize').remove();
+
+      // Jump on level if it's a "NavBar"
+      if ($$.hasClass('sf-navbar')) {
+        $$ = $('li > ul', $$);
+      }
+      // cache all ul elements 
+      $ULs = $$.find('ul:not(.sf-megamenu)');
+      // loop through each ul in menu
+      $ULs.each(function(i) {
+        // cache this ul
+        var $ul = $ULs.eq(i);
+        // get all (li) children of this ul
+        var $LIs = $ul.children();
+        // get all anchor grand-children
+        var $As = $LIs.children('a');
+        // force content to one line and save current float property
+        var liFloat = $LIs.css('white-space','nowrap').css('float');
+        // remove width restrictions and floats so elements remain vertically stacked
+        var emWidth = $ul.add($LIs).add($As).css({
+          'float' : 'none',
+          'width'  : 'auto'
+        })
+        // this ul will now be shrink-wrapped to longest li due to position:absolute
+        // so save its width as ems. Clientwidth is 2 times faster than .width() - thanks Dan Switzer
+        .end().end()[0].clientWidth / fontsize;
+        // add more width to ensure lines don't turn over at certain sizes in various browsers
+        emWidth += o.extraWidth;
+        // restrict to at least minWidth and at most maxWidth
+        if (emWidth > o.maxWidth)    { emWidth = o.maxWidth; }
+        else if (emWidth < o.minWidth)  { emWidth = o.minWidth; }
+        emWidth += 'em';
+        // set ul to width in ems
+        $ul.css('width',emWidth);
+        // restore li floats to avoid IE bugs
+        // set li width to full width of this ul
+        // revert white-space to normal
+        $LIs.css({
+          'float' : liFloat,
+          'width' : '100%',
+          'white-space' : 'normal'
+        })
+        // update offset position of descendant ul to reflect new width of parent
+        .each(function(){
+          var $childUl = $('>ul',this);
+          var offsetDirection = $childUl.css('left')!==undefined ? 'left' : 'right';
+          $childUl.css(offsetDirection,emWidth);
+        });
+      });
+
+    });
+  };
+  // expose defaults
+  $.fn.supersubs.defaults = {
+    minWidth: 9, // requires em unit.
+    maxWidth: 25, // requires em unit.
+    extraWidth: 0 // extra width can ensure lines don't sometimes turn over due to slight browser differences in how they round-off values
+  };
+
+})(jQuery); // plugin code ends;
+/*
+* Supposition v0.2 - an optional enhancer for Superfish jQuery menu widget - LAST UPDATE: MARCH 23rd, 2011
+*
+* Copyright (c) 2008 Joel Birch - based mostly on work by Jesse Klaasse and credit goes largely to him.
+* Special thanks to Karl Swedberg for valuable input.
+* 
+* Dec 28th, 2010 - Modified for the Superfish project for Drupal (http://drupal.org/project/superfish)
+*
+* jQuery version: 1.3.x or higher.
+*
+* Dual licensed under the MIT and GPL licenses:
+* 	http://www.opensource.org/licenses/mit-license.php
+* 	http://www.gnu.org/licenses/gpl.html
+*/
+
+(function($){
+  $.fn.supposition = function(){
+    var $w = $(window), /*do this once instead of every onBeforeShow call*/
+    _offset = function(dir) {
+      return window[dir == 'y' ? 'pageYOffset' : 'pageXOffset']
+      || document.documentElement && document.documentElement[dir=='y' ? 'scrollTop' : 'scrollLeft']
+      || document.body[dir=='y' ? 'scrollTop' : 'scrollLeft'];
+    },
+    onHide = function(){
+      this.css({Top:'',Right:'',Bottom:'',Left:''});
+    },
+    onBeforeShow = function(){
+      this.each(function(){
+        var $u = $(this);
+        $u.css('display','block');
+        var menuWidth = $u.width(),
+        menuParentWidth = $u.closest('li').outerWidth(true),
+        menuParentLeft = $u.closest('li').offset().left,
+        totalRight = $w.width() + _offset('x'),
+        menuRight = $u.offset().left + menuWidth,
+        exactMenuWidth = (menuRight > (menuParentWidth + menuParentLeft)) ? menuWidth - (menuRight - (menuParentWidth + menuParentLeft)) : menuWidth;  
+        if ($u.parents('.sf-js-enabled').hasClass('rtl')) {
+          if (menuParentLeft < exactMenuWidth) {
+            $u.css('left', menuParentWidth + 'px');
+            $u.css('right', 'auto');
+          }
+        }
+        else {
+          if (menuRight > totalRight && menuParentLeft > menuWidth) {
+            $u.css('right', menuParentWidth + 'px');
+            $u.css('left', 'auto');
+          }
+        }
+        var windowHeight = $w.height(),
+        offsetTop = $u.offset().top,
+        menuParentHeight = $u.parent().outerHeight(true),
+        menuHeight = $u.height(),
+        baseline = windowHeight + _offset('y');
+        var expandUp = ((offsetTop + menuHeight > baseline) && (offsetTop > menuHeight));
+        if (expandUp) {
+          $u.css('bottom', menuParentHeight + 'px');
+          $u.css('top', 'auto');
+        }
+        $u.css('display','none');
+      });
+    };
+
+    return this.each(function() {
+    var o = $.fn.superfish.o[this.serial]; /* get this menu's options */
+
+    /* if callbacks already set, store them */
+    var _onBeforeShow = o.onBeforeShow,
+    _onHide = o.onHide;
+
+    $.extend($.fn.superfish.o[this.serial],{
+    onBeforeShow: function() {
+    onBeforeShow.call(this); /* fire our Supposition callback */
+    _onBeforeShow.call(this); /* fire stored callbacks */
+    },
+    onHide: function() {
+    onHide.call(this); /* fire our Supposition callback */
+    _onHide.call(this); /* fire stored callbacks */
+    }
+    });
+    });
+  };
+})(jQuery);;
+/*
+ * sf-Touchscreen v1.0b - Provides touchscreen compatibility for the jQuery Superfish plugin. - LAST UPDATE: MARCH 23rd, 2011
+ *
+ * Developer's notes:
+ * Built as a part of the Superfish project for Drupal (http://drupal.org/project/superfish) 
+ * Found any bug? have any cool ideas? contact me right away! http://drupal.org/user/619294/contact
+ *
+ * jQuery version: 1.3.x or higher.
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *   http://www.gnu.org/licenses/gpl.html
+*/
+
+(function($){
+  $.fn.sftouchscreen = function() {
+    // Return original object to support chaining.
+    return this.each( function() {
+      // Select hyperlinks from parent menu items.
+      $(this).find('li > ul').closest('li').children('a').each( function() {
+	    var $item = $(this);
+        // No .toggle() here as it's not possible to reset it.
+        $item.click( function(event){
+	      // Already clicked? proceed to the URI.
+          if ($item.hasClass('sf-clicked')) {
+            var $uri = $item.attr('href');
+            window.location = $uri;
+          }
+          else {
+            event.preventDefault();
+            $item.addClass('sf-clicked');
+          }
+        }).closest('li').mouseleave( function(){
+          // So, we reset everything.
+          $item.removeClass('sf-clicked');
+        });
+	  });
+    });
+  };
+})(jQuery);;
+(function ($) {
+
+Drupal.jQueryUiFilter = Drupal.jQueryUiFilter || {}
+Drupal.jQueryUiFilter.accordionOptions = Drupal.jQueryUiFilter.accordionOptions || {}
+
+/**
+ * Scroll to an accordion's active element.
+ */
+Drupal.jQueryUiFilter.accordionScrollTo = function(accordion) {
+  var options = $(accordion).data('options') || {}
+  if (!options['scrollTo'] || !$(accordion).find('.ui-state-active').length) {
+    return;
+  }
+
+  var top = $(accordion).find('.ui-state-active').offset().top;
+  if (options['scrollTo']['duration']) {
+    $('html, body').animate({scrollTop: top}, options['scrollTo']['duration']);
+  }
+  else {
+    $('html, body').scrollTop(top);
+  }
+}
+
+/**
+ * Accordion change event handler to bookmark active element in location.hash.
+ */
+Drupal.jQueryUiFilter.accordionChangeStart = function(event, ui) {
+  var href = ui.newHeader.find('a').attr('href');
+  if (href) {
+    location.hash = href;
+    return false; // Cancel event and let accordionHashChangeEvent handler activate the element.
+  }
+  else {
+    return true;
+  }
+}
+
+/**
+ * On hash change activate and scroll to an accordion element.
+ */
+Drupal.jQueryUiFilter.accordionHashChangeEvent = function() {
+  $accordionHeader = $('.ui-accordion > .ui-accordion-header:has(a[href="' + location.hash + '"])')
+  $accordion = $accordionHeader.parent();
+  var index = $accordionHeader.prevAll('.ui-accordion-header').length;
+
+  if ($.ui.version == '1.8.7') {
+    // NOTE: Accordion 'Active' property not change'ing http://bugs.jqueryui.com/ticket/4576
+    $accordion.accordion('activate', index);
+  }
+  else {
+    // NOTE: Accordion 'Active' property http://api.jqueryui.com/accordion/#option-active
+    $accordion.accordion('option', 'active', index);
+  }
+}
+
+/**
+ * jQuery UI filter accordion behavior.
+ */
+Drupal.behaviors.jQueryUiFilterAccordion  = {attach: function(context) {
+  if (Drupal.settings.jQueryUiFilter.disabled) {
+    return;
+  }
+
+  var headerTag = Drupal.settings.jQueryUiFilter.accordionHeaderTag;
+
+  $('div.jquery-ui-filter-accordion', context).once('jquery-ui-filter-accordion', function () {
+    var options = Drupal.jQueryUiFilter.getOptions('accordion');
+
+    // Look for jQuery UI filter header class.
+    options['header'] = '.jquery-ui-filter-accordion-header';
+
+    if ($(this).hasClass('jquery-ui-filter-accordion-collapsed')) { // Set collapsed options
+      options['collapsible'] = true;
+      options['active'] = false;
+    }
+
+    // Convert <h*> to div to remove tag and insure the accordion does not use the existing h3 style.
+    // Sets active item based on location.hash.
+    var index = 0;
+    $(this).find(headerTag + '.jquery-ui-filter-accordion-header').each(function(){
+      var id = this.id || $(this).text().toLowerCase().replace(/[^-a-z0-9]+/gm, '-');
+      var hash = '#' + id;
+      if (hash == location.hash) {
+        options['active'] = index;
+      }
+      index++;
+
+      $(this).replaceWith('<div class="jquery-ui-filter-header jquery-ui-filter-accordion-header"><a href="' + hash + '">' + $(this).html() + '</a></div>');
+    });
+
+    // DEBUG:
+    // console.log(options);
+
+    // Save options as data and init accordion
+    $(this).data('options', options).accordion(options);
+
+    // Scroll to active
+    Drupal.jQueryUiFilter.accordionScrollTo(this);
+
+    // Bind accordion change event to record history
+    if (options['history']) {
+      $(this).bind('accordionchangestart', Drupal.jQueryUiFilter.accordionChangeStart);
+    }
+
+    // Init hash change event handling once
+    if (!Drupal.jQueryUiFilter.accordionInitialized) {
+      Drupal.jQueryUiFilter.hashChange(Drupal.jQueryUiFilter.accordionHashChangeEvent);
+    }
+    Drupal.jQueryUiFilter.accordionInitialized = true;
+  });
+
+}}
+
+})(jQuery);
+;
+(function ($) {
+
+Drupal.jQueryUiFilter = Drupal.jQueryUiFilter || {}
+Drupal.jQueryUiFilter.dialogOptions = Drupal.jQueryUiFilter.dialogOptions || {closeText : 'close'}
+
+// Set default dialog query parameter.
+var match = /dialogFeatures=([^&]+)/.exec(location.search);
+Drupal.jQueryUiFilter.dialogOptions.dialogFeatures = ((match) ? match[1] : {});
+
+/**
+ * Reload page with uuid to insure cache is cleared
+ */
+Drupal.jQueryUiFilter.dialogReloadPage = function() {
+  top.location.href = top.location.pathname +
+    ((top.location.search) ? top.location.search + '&' : '?') +
+    'no-cache=' + ((new Date().getTime()) * Math.random(10));
+
+  // Close dialog so that the user sees something has happened.
+  $('#jquery-ui-filter-dialog').dialog('destroy');
+}
+
+/**
+ * Convert dialogFeatures array to string.
+ */
+Drupal.jQueryUiFilter.dialogFeaturesToString = function(dialogFeatures) {
+  if (typeof dialogFeatures == 'string') {
+    return dialogFeatures;
+  }
+
+  dialogFeatures['protocol'] = location.protocol.replace(':', '');
+
+  var features = [];
+  for(var name in dialogFeatures) {
+    features[features.length] = name + '=' + dialogFeatures[name];
+  }
+  return features.join(',');
+}
+
+/**
+ * Append to dialogFeatures to URL query string via '?dialogFeatures=1' or '?dialogFeatures=form-onsubmit_close=1'.
+ */
+Drupal.jQueryUiFilter.dialogFeaturesAppendToURL = function(url, dialogFeatures) {
+  if (url.indexOf('dialogFeatures') !== -1) {
+    return url;
+  }
+
+  dialogFeatures = dialogFeatures || Drupal.jQueryUiFilter.dialogOptions.dialogFeatures;
+  dialogFeatures = Drupal.jQueryUiFilter.dialogFeaturesToString(dialogFeatures);
+
+  var query = ((url.indexOf('?') === -1) ? '?' : '&') + 'dialogFeatures=' + dialogFeatures;
+  if (url.indexOf('#') !== -1) {
+    return url.replace('#', query + '#');
+  }
+  else {
+    return url + query;
+  }
+}
+
+/**
+ * Open jQuery UI filter dialog. Allows other modules to re-use this functionality.
+ */
+Drupal.jQueryUiFilter.dialogOpen = function(url, options) {
+  // Check url against whitelist
+  if (url.indexOf('://') !== -1) {
+    var domain = url.match(/:\/\/(.[^/]+)/)[1];
+    var whitelist = Drupal.settings.jQueryUiFilter.dialogWhitelist.split(/\s+/);
+    whitelist[whitelist.length] = location.hostname; // Always add custom host
+    if (jQuery.inArray(domain, whitelist) == -1) {
+      window.location = url;
+      return;
+    }
+  }
+
+  // Initialize options with dialogFeatures.
+  options = jQuery.extend(
+    {dialogFeatures: {}},
+    $.ui.dialog.prototype.options,
+    options
+  );
+
+  // Destroy dialog when it is closed.
+  options['close'] = function(event, ui) {
+    $(this).dialog('destroy').remove();
+  }
+
+  // Automatically adjust iframe height based on window settings.
+  var windowHeight = $(window).height() - 50;
+  var windowWidth = $(window).width() - 50;
+  if (options['height'] == 'auto') {
+    options['height'] = options['maxHeight'] || windowHeight;
+  }
+  if (options['width'] == 'auto') {
+    options['width'] = options['maxWidth'] || windowWidth;
+  }
+
+  // Make sure dialog is not larger then the viewport.
+  if (options['height'] > windowHeight) {
+    options['height'] = windowHeight;
+  }
+  if (options['width'] > windowWidth) {
+    options['width'] = windowWidth;
+  }
+
+  // Add close button to dialog
+  if (options['closeButton']) {
+    options['buttons'][ Drupal.t(options['closeText'] || 'Close') ] = function() {
+      $(this).dialog('close');
+    }
+  }
+  delete options['closeButton'];
+
+  // Set iframe scrolling attribute.
+  options['scrolling'] = options['scrolling'] || 'auto';
+
+  // Set dialog URL with ?dialogFeature= parameters.
+  url = Drupal.jQueryUiFilter.dialogFeaturesAppendToURL(url, options['dialogFeatures']);
+
+  // Remove existing dialog and iframe, this allows us to reset the
+  // dialog's options and allow dialogs to open external domains.
+  $('#jquery-ui-filter-dialog').dialog('destroy').remove();
+
+  // Create iframe
+  $('body').append('<div id="jquery-ui-filter-dialog">'
+    + '<div id="jquery-ui-filter-dialog-container">'
+    + '<iframe id="jquery-ui-filter-dialog-iframe" name="jquery-ui-filter-dialog-iframe" width="100%" height="100%" marginWidth="0" marginHeight="0" frameBorder="0" scrolling="' + options['scrolling'] + '" src="' + url + '" />'
+    + '</div>'
+    + '</div>'
+  );
+
+  // Open dialog
+  $('#jquery-ui-filter-dialog').dialog(options);
+
+  // DEBUG:
+  // console.log(options);
+}
+
+/**
+ * jQuery UI filter dialog behavior
+ */
+Drupal.behaviors.jQueryUiFilterDialog = {attach: function(context) {
+  if (Drupal.settings.jQueryUiFilter.disabled) {
+    return;
+  }
+
+  // Append ?jquery_ui_filter_dialog=1 to all link and form action inside a dialog iframe with dialogFeatures.
+  if ((top != self) && (self.location.search.indexOf('dialogFeatures') !== -1)) {
+    $('a', context).once('jquery-ui-filter-dialog-link', function() {
+      if (this.tagName == 'A') {
+        this.href = Drupal.jQueryUiFilter.dialogFeaturesAppendToURL(this.href);
+      }
+      else if (this.tagName == 'FORM') {
+        this.action = Drupal.jQueryUiFilter.dialogFeaturesAppendToURL(this.action);
+      }
+    });
+
+    // Do not allow dialogs to be nested inside of dialogs.
+    return;
+  }
+
+  $('a.jquery-ui-filter-dialog', context).once('jquery-ui-filter-dialog', function () {
+    $(this).click(function() {
+      // Get hidden JSON string that has been cleaned up on the server using PHP.
+      // See _jquery_ui_filter_dialog_process_replacer().
+      var json  = $(this).attr('rel');
+      if (json) {
+        var options = Drupal.jQueryUiFilter.getOptions('dialog', JSON.parse(unescape(json)));
+      }
+      else {
+        var options = Drupal.jQueryUiFilter.getOptions('dialog', {});
+      }
+      // Customize dialog using the link's title.
+      if ($(this).attr('title')) {
+        options['title'] = $(this).attr('title');
+      }
+
+      Drupal.jQueryUiFilter.dialogOpen(this.href, options);
+      return false;
+    });
+  });
+}}
+
+})(jQuery);
+;
+(function ($) {
+
+/**
+ * Equal height plugin.
+ *
+ * From: http://www.problogdesign.com/coding/30-pro-jquery-tips-tricks-and-strategies/
+ */
+if (jQuery.fn.equalHeight == undefined) {
+  jQuery.fn.equalHeight = function () {
+    var tallest = 0;
+    this.each(function() {
+      tallest = ($(this).height() > tallest)? $(this).height() : tallest;
+    });
+    return this.height(tallest);
+  }
+}
+
+Drupal.jQueryUiFilter = Drupal.jQueryUiFilter || {}
+Drupal.jQueryUiFilter.tabsOptions = Drupal.jQueryUiFilter.tabsOptions || {}
+
+/**
+ * Tabs pagings
+ *
+ * Inspired by : http://css-tricks.com/2361-jquery-ui-tabs-with-nextprevious/
+ */
+Drupal.jQueryUiFilter.tabsPaging = function(selector, options) {
+  options = jQuery.extend({paging: {'back': '&#171; Previous', 'next': 'Next &#187;'}}, options);
+
+  var $tabs = $(selector);
+  var numberOfTabs = $tabs.find(".ui-tabs-panel").size() - 1;
+
+  // Add back and next buttons.
+  // NOTE: Buttons are not 'themeable' since they should look like a themerolled jQuery UI button.
+  $tabs.find('.ui-tabs-panel').each(function(i){
+    var html = '';
+    if (i != 0) {
+      html += '<button type="button" class="ui-tabs-prev" rel="' + (i-1) + '" style="float:left">' + Drupal.t(options.paging.back) + '</button>';
+    }
+    if (i != numberOfTabs) {
+      html += '<button type="button" href="#" class="ui-tabs-next" rel="' + (i+1) + '" style="float:right">' + Drupal.t(options.paging.next) + '</button>';
+    }
+    $(this).append('<div class="ui-tabs-paging clearfix clear-block">' +  html + '</div>');
+  });
+
+  // Init buttons
+  $tabs.find('button.ui-tabs-prev, button.ui-tabs-next').button();
+
+  // Add event handler
+  $tabs.find('.ui-tabs-next, .ui-tabs-prev').click(function() {
+    if ($.ui.version == '1.8.7') {
+      $tabs.tabs('select', parseInt($(this).attr("rel")));
+    }
+    else {
+      $tabs.tabs('option', 'active', parseInt($(this).attr("rel")));
+    }
+    return false;
+  });
+}
+
+/**
+ * Scroll to an accordion's active element.
+ */
+Drupal.jQueryUiFilter.tabsScrollTo = function(tabs) {
+  var options = $(tabs).data('options') || {}
+  if (!options['scrollTo']) {
+    return;
+  }
+
+  var top = $(tabs).offset().top;
+  if (options['scrollTo']['duration']) {
+    $('html, body').animate({scrollTop: top}, options['scrollTo']['duration']);
+  }
+  else {
+    $('html, body').scrollTop(top);
+  }
+}
+
+
+/**
+ * Tabs select event handler to bookmark selected tab in location.hash.
+ */
+Drupal.jQueryUiFilter.tabsSelect = function(event, ui) {
+  location.hash = $(ui.tab).attr('href');
+}
+
+/**
+ * On hash change select tab.
+ *
+ * Inspired by: http://benalman.com/code/projects/jquery-bbq/examples/fragment-jquery-ui-tabs/
+ */
+Drupal.jQueryUiFilter.tabsHashChangeEvent = function() {
+  var $tab = $('.ui-tabs-nav > li:has(a[href="' + location.hash + '"])');
+  $tabs = $tab.parent().parent();
+
+  var selected = $tab.prevAll().length;
+
+  if ($.ui.version == '1.8.7') {
+    if ($tabs.tabs('option', 'selected') != selected) {
+      $tabs.tabs('select', selected);
+    }
+  }
+  else {
+    if ($tabs.tabs('option', 'active') != selected) {
+      $tabs.tabs('option', 'active', selected);
+    }
+  }
+}
+
+/**
+ * jQuery UI filter tabs behavior
+ */
+Drupal.behaviors.jQueryUiFilterTabs = {attach: function(context) {
+  if (Drupal.settings.jQueryUiFilter.disabled) {
+    return;
+  }
+
+  var headerTag = Drupal.settings.jQueryUiFilter.tabsHeaderTag;
+
+  // Tabs
+  $('div.jquery-ui-filter-tabs', context).once('jquery-ui-filter-tabs', function () {
+    var options = Drupal.jQueryUiFilter.getOptions('tabs');
+
+    // Get <h*> text and add to tabs.
+    // Sets selected tab based on location.hash.
+    var scrollTo = false;
+    var index = 0;
+    var tabs = '<ul>';
+    $(this).find(headerTag + '.jquery-ui-filter-tabs-header').each(function(){
+      var id = this.id || $(this).text().toLowerCase().replace(/[^-a-z0-9]+/gm, '-');
+      var hash = '#' + id;
+
+      if (hash == location.hash) {
+        scrollTo = true;
+        options['selected'] = index;
+      }
+      index++;
+
+      tabs += '<li><a href="' + hash + '">' + $(this).html() + '</a></li>';
+      $(this).next('div.jquery-ui-filter-tabs-container').attr('id', id);
+      $(this).remove();
+    });
+    tabs += '</ul>';
+    $(this).prepend(tabs);
+
+    // DEBUG:
+    // console.log(options);
+
+    // Save options as data and init tabs
+    $(this).data('options', options).tabs(options);
+
+    // Equal height tab
+    $(this).find('.ui-tabs-nav li').equalHeight();
+
+    // Add paging.
+    if (options['paging']) {
+      Drupal.jQueryUiFilter.tabsPaging(this, options);
+    }
+
+    // Bind tabs select event to record history
+    if (options['history']) {
+      $(this).bind('tabsselect', Drupal.jQueryUiFilter.tabsSelect);
+    }
+
+    // Scroll to selected tabs widget
+    if (scrollTo) {
+      Drupal.jQueryUiFilter.tabsScrollTo(this);
+    }
+
+    // Init hash change event handling once
+    if (!Drupal.jQueryUiFilter.hashChangeInit) {
+      Drupal.jQueryUiFilter.hashChange(Drupal.jQueryUiFilter.tabsHashChangeEvent);
+    }
+    Drupal.jQueryUiFilter.hashChangeInit = true;
+  });
+}}
+
+})(jQuery);
+;
+!function(e){"use strict";e.fn.meanmenu=function(n){var a={meanMenuTarget:jQuery(this),meanMenuContainer:"body",meanMenuClose:"X",meanMenuCloseSize:"18px",meanMenuOpen:"<span /><span /><span />",meanRevealPosition:"right",meanRevealPositionDistance:"0",meanRevealColour:"",meanScreenWidth:"480",meanNavPush:"",meanShowChildren:!0,meanExpandableChildren:!0,meanExpand:"+",meanContract:"-",meanRemoveAttrs:!1,onePage:!1,meanDisplay:"block",removeElements:""};n=e.extend(a,n);var t=document.documentElement.clientWidth||document.body.clientWidth;return this.each(function(){var e=n.meanMenuTarget,a=n.meanMenuTarget.clone();a.find(".contextual-links-wrapper").remove().find("ul.contextual-links").remove();var r=n.meanMenuContainer,i=n.meanMenuClose,u=n.meanMenuCloseSize,m=n.meanMenuOpen,s=n.meanRevealPosition,l=n.meanRevealPositionDistance,o=n.meanRevealColour,c=n.meanScreenWidth,d=n.meanNavPush,v=".meanmenu-reveal",h=n.meanShowChildren,y=n.meanExpandableChildren,j=n.meanExpand,Q=n.meanContract,f=n.meanRemoveAttrs,g=n.onePage,p=n.meanDisplay,C=n.removeElements,x=!1;(navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPod/i)||navigator.userAgent.match(/iPad/i)||navigator.userAgent.match(/Android/i)||navigator.userAgent.match(/Blackberry/i)||navigator.userAgent.match(/Windows Phone/i))&&(x=!0),(navigator.userAgent.match(/MSIE 8/i)||navigator.userAgent.match(/MSIE 7/i))&&jQuery("html").css("overflow-y","scroll");var w="",b=function(){if("center"===s){var e=document.documentElement.clientWidth||document.body.clientWidth,n=e/2-22+"px";w="left:"+n+";right:auto;",x?jQuery(".meanmenu-reveal").animate({left:n}):jQuery(".meanmenu-reveal").css("left",n)}},A=!1,M=!1;"right"===s&&(w="right:"+l+";left:auto;"),"left"===s&&(w="left:"+l+";right:auto;"),b();var E="",P=function(){E.html(jQuery(E).is(".meanmenu-reveal.meanclose")?i:m)},W=function(){jQuery(".mean-bar,.mean-push").remove(),jQuery(r).removeClass("mean-container"),jQuery(e).css("display",p),A=!1,M=!1,jQuery(C).removeClass("mean-remove")},k=function(){var n="background:"+o+";color:"+o+";"+w;if(c>=t){jQuery(C).addClass("mean-remove"),M=!0,jQuery(r).addClass("mean-container"),jQuery(".mean-container").prepend('<div class="mean-bar"><a href="#nav" class="meanmenu-reveal" style="'+n+'">Show Navigation</a><nav class="mean-nav"></nav></div>');var i=jQuery(a).html();jQuery(".mean-nav").html(i),f&&jQuery("nav.mean-nav ul, nav.mean-nav ul *").each(function(){jQuery(this).is(".mean-remove")?jQuery(this).attr("class","mean-remove"):jQuery(this).removeAttr("class"),jQuery(this).removeAttr("id")}),jQuery(e).before('<div class="mean-push" />'),jQuery(".mean-push").css("margin-top",d),jQuery(e).hide(),jQuery(".meanmenu-reveal").show(),jQuery(v).html(m),E=jQuery(v),jQuery(".mean-nav ul").hide(),h?y?(jQuery(".mean-nav ul ul").each(function(){jQuery(this).children().length&&jQuery(this,"li:first").parent().append('<a class="mean-expand" href="#" style="font-size: '+u+'">'+j+"</a>")}),jQuery(".mean-expand").on("click",function(e){e.preventDefault(),jQuery(this).hasClass("mean-clicked")?(jQuery(this).text(j),jQuery(this).prev("ul").slideUp(300,function(){})):(jQuery(this).text(Q),jQuery(this).prev("ul").slideDown(300,function(){})),jQuery(this).toggleClass("mean-clicked")})):jQuery(".mean-nav ul ul").show():jQuery(".mean-nav ul ul").hide(),jQuery(".mean-nav ul li").last().addClass("mean-last"),E.removeClass("meanclose"),jQuery(E).click(function(e){e.preventDefault(),A===!1?(E.css("text-align","center"),E.css("text-indent","0"),E.css("font-size",u),jQuery(".mean-nav ul:first").slideDown(),A=!0):(jQuery(".mean-nav ul:first").slideUp(),A=!1),E.toggleClass("meanclose"),P(),jQuery(C).addClass("mean-remove")}),g&&jQuery(".mean-nav ul > li > a:first-child").on("click",function(){jQuery(".mean-nav ul:first").slideUp(),A=!1,jQuery(E).toggleClass("meanclose").html(m)})}else W()};x||jQuery(window).resize(function(){t=document.documentElement.clientWidth||document.body.clientWidth,t>c,W(),c>=t?(k(),b()):W()}),jQuery(window).resize(function(){t=document.documentElement.clientWidth||document.body.clientWidth,x?(b(),c>=t?M===!1&&k():W()):(W(),c>=t&&(k(),b()))}),k()})}}(jQuery);;
+/**
+ * @file
+ * Integrate Mean Menu library with Responsive Menus module.
+ */
+(function ($) {
+  Drupal.behaviors.responsive_menus_mean_menu = {
+    attach: function (context, settings) {
+      settings.responsive_menus = settings.responsive_menus || {};
+      $.each(settings.responsive_menus, function(ind, iteration) {
+        if (iteration.responsive_menus_style != 'mean_menu') {
+          return true;
+        }
+        if (!iteration.selectors.length) {
+          return;
+        }
+        // Set 1/0 to true/false respectively.
+        $.each(iteration, function(key, value) {
+          if (value == 0) {
+            iteration[key] = false;
+          }
+          if (value == 1) {
+            iteration[key] = true;
+          }
+        });
+        // Call meanmenu() with our custom settings.
+        $(iteration.selectors).once('responsive-menus-mean-menu', function() {
+          $(this).meanmenu({
+            meanMenuContainer: iteration.container || "body",
+            meanMenuClose: iteration.close_txt || "X",
+            meanMenuCloseSize: iteration.close_size || "18px",
+            meanMenuOpen: iteration.trigger_txt || "<span /><span /><span />",
+            meanRevealPosition: iteration.position || "right",
+            meanScreenWidth: iteration.media_size || "480",
+            meanExpand: iteration.expand_txt || "+",
+            meanContract: iteration.contract_txt || "-",
+            meanShowChildren: iteration.show_children,
+            meanExpandableChildren: iteration.expand_children,
+            meanRemoveAttrs: iteration.remove_attrs
+          });
+        });
+      });
+
+    }
+  };
+}(jQuery));
+;
+(function ($) {
+
+Drupal.googleanalytics = {};
+
+$(document).ready(function() {
+
+  // Attach mousedown, keyup, touchstart events to document only and catch
+  // clicks on all elements.
+  $(document.body).bind("mousedown keyup touchstart", function(event) {
+
+    // Catch the closest surrounding link of a clicked element.
+    $(event.target).closest("a,area").each(function() {
+
+      // Is the clicked URL internal?
+      if (Drupal.googleanalytics.isInternal(this.href)) {
+        // Skip 'click' tracking, if custom tracking events are bound.
+        if ($(this).is('.colorbox') && (Drupal.settings.googleanalytics.trackColorbox)) {
+          // Do nothing here. The custom event will handle all tracking.
+          //console.info("Click on .colorbox item has been detected.");
+        }
+        // Is download tracking activated and the file extension configured for download tracking?
+        else if (Drupal.settings.googleanalytics.trackDownload && Drupal.googleanalytics.isDownload(this.href)) {
+          // Download link clicked.
+          ga("send", {
+            "hitType": "event",
+            "eventCategory": "Downloads",
+            "eventAction": Drupal.googleanalytics.getDownloadExtension(this.href).toUpperCase(),
+            "eventLabel": Drupal.googleanalytics.getPageUrl(this.href),
+            "transport": "beacon"
+          });
+        }
+        else if (Drupal.googleanalytics.isInternalSpecial(this.href)) {
+          // Keep the internal URL for Google Analytics website overlay intact.
+          ga("send", {
+            "hitType": "pageview",
+            "page": Drupal.googleanalytics.getPageUrl(this.href),
+            "transport": "beacon"
+          });
+        }
+      }
+      else {
+        if (Drupal.settings.googleanalytics.trackMailto && $(this).is("a[href^='mailto:'],area[href^='mailto:']")) {
+          // Mailto link clicked.
+          ga("send", {
+            "hitType": "event",
+            "eventCategory": "Mails",
+            "eventAction": "Click",
+            "eventLabel": this.href.substring(7),
+            "transport": "beacon"
+          });
+        }
+        else if (Drupal.settings.googleanalytics.trackOutbound && this.href.match(/^\w+:\/\//i)) {
+          if (Drupal.settings.googleanalytics.trackDomainMode !== 2 || (Drupal.settings.googleanalytics.trackDomainMode === 2 && !Drupal.googleanalytics.isCrossDomain(this.hostname, Drupal.settings.googleanalytics.trackCrossDomains))) {
+            // External link clicked / No top-level cross domain clicked.
+            ga("send", {
+              "hitType": "event",
+              "eventCategory": "Outbound links",
+              "eventAction": "Click",
+              "eventLabel": this.href,
+              "transport": "beacon"
+            });
+          }
+        }
+      }
+    });
+  });
+
+  // Track hash changes as unique pageviews, if this option has been enabled.
+  if (Drupal.settings.googleanalytics.trackUrlFragments) {
+    window.onhashchange = function() {
+      ga("send", {
+        "hitType": "pageview",
+        "page": location.pathname + location.search + location.hash
+      });
+    };
+  }
+
+  // Colorbox: This event triggers when the transition has completed and the
+  // newly loaded content has been revealed.
+  if (Drupal.settings.googleanalytics.trackColorbox) {
+    $(document).bind("cbox_complete", function () {
+      var href = $.colorbox.element().attr("href");
+      if (href) {
+        ga("send", {
+          "hitType": "pageview",
+          "page": Drupal.googleanalytics.getPageUrl(href)
+        });
+      }
+    });
+  }
+
+});
+
+/**
+ * Check whether the hostname is part of the cross domains or not.
+ *
+ * @param string hostname
+ *   The hostname of the clicked URL.
+ * @param array crossDomains
+ *   All cross domain hostnames as JS array.
+ *
+ * @return boolean
+ */
+Drupal.googleanalytics.isCrossDomain = function (hostname, crossDomains) {
+  /**
+   * jQuery < 1.6.3 bug: $.inArray crushes IE6 and Chrome if second argument is
+   * `null` or `undefined`, http://bugs.jquery.com/ticket/10076,
+   * https://github.com/jquery/jquery/commit/a839af034db2bd934e4d4fa6758a3fed8de74174
+   *
+   * @todo: Remove/Refactor in D8
+   */
+  if (!crossDomains) {
+    return false;
+  }
+  else {
+    return $.inArray(hostname, crossDomains) > -1 ? true : false;
+  }
+};
+
+/**
+ * Check whether this is a download URL or not.
+ *
+ * @param string url
+ *   The web url to check.
+ *
+ * @return boolean
+ */
+Drupal.googleanalytics.isDownload = function (url) {
+  var isDownload = new RegExp("\\.(" + Drupal.settings.googleanalytics.trackDownloadExtensions + ")([\?#].*)?$", "i");
+  return isDownload.test(url);
+};
+
+/**
+ * Check whether this is an absolute internal URL or not.
+ *
+ * @param string url
+ *   The web url to check.
+ *
+ * @return boolean
+ */
+Drupal.googleanalytics.isInternal = function (url) {
+  var isInternal = new RegExp("^(https?):\/\/" + window.location.host, "i");
+  return isInternal.test(url);
+};
+
+/**
+ * Check whether this is a special URL or not.
+ *
+ * URL types:
+ *  - gotwo.module /go/* links.
+ *
+ * @param string url
+ *   The web url to check.
+ *
+ * @return boolean
+ */
+Drupal.googleanalytics.isInternalSpecial = function (url) {
+  var isInternalSpecial = new RegExp("(\/go\/.*)$", "i");
+  return isInternalSpecial.test(url);
+};
+
+/**
+ * Extract the relative internal URL from an absolute internal URL.
+ *
+ * Examples:
+ * - http://mydomain.com/node/1 -> /node/1
+ * - http://example.com/foo/bar -> http://example.com/foo/bar
+ *
+ * @param string url
+ *   The web url to check.
+ *
+ * @return string
+ *   Internal website URL
+ */
+Drupal.googleanalytics.getPageUrl = function (url) {
+  var extractInternalUrl = new RegExp("^(https?):\/\/" + window.location.host, "i");
+  return url.replace(extractInternalUrl, '');
+};
+
+/**
+ * Extract the download file extension from the URL.
+ *
+ * @param string url
+ *   The web url to check.
+ *
+ * @return string
+ *   The file extension of the passed url. e.g. "zip", "txt"
+ */
+Drupal.googleanalytics.getDownloadExtension = function (url) {
+  var extractDownloadextension = new RegExp("\\.(" + Drupal.settings.googleanalytics.trackDownloadExtensions + ")([\?#].*)?$", "i");
+  var extension = extractDownloadextension.exec(url);
+  return (extension === null) ? '' : extension[1];
+};
+
+})(jQuery);
+;

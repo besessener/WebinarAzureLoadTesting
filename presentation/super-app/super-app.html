@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulated Loading Bar with Fake HTTP Requests</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #loadingBarContainer {
+            width: 500px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        #loadingBar {
+            height: 100%;
+            width: 0%;
+            background-color: #4CAF50;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+
+        #content {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loadingBarContainer">
+        <div id="loadingBar">0%</div>
+    </div>
+
+    <div id="content">
+        <h2>Ooops!</h2>
+        <h1>500</h1>
+        <h2>Internal Server Error.</h2>
+    </div>
+
+    <script>
+        let progress = 0;
+        const interval = 100; // Update every 100 ms
+        const totalTime = 30000; // Total time for loading = 10 seconds
+        const increments = 100 / (totalTime / interval); // Calculate how much to increment on each update
+
+        function fakeHttpRequest(callback, timeout) {
+            // Simulate a 2-second HTTP request.
+            setTimeout(function () {
+                callback();
+            }, timeout);
+        }
+
+        const loadingBar = document.getElementById('loadingBar');
+        const loadingInterval = setInterval(() => {
+            progress += increments;
+            loadingBar.style.width = progress + '%';
+            loadingBar.innerText = Math.floor(progress) + '%';
+
+            if (progress >= 100) {
+                clearInterval(loadingInterval);
+                document.getElementById('loadingBarContainer').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }
+        }, interval);
+
+        // Simulate a few fake HTTP requests during loading
+        fakeHttpRequest(function () {
+            fetch('https://qytera.de/super-app/resources')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse the response body as JSON
+                })
+            console.log("Error loading resources");
+        }, 6666);
+
+        fakeHttpRequest(function () {
+            fetch('https://qytera.de/super-app/dependencies')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse the response body as JSON
+                })
+            console.log("Failed with dependency injection");
+        }, 14000);
+
+        fakeHttpRequest(function () {
+            fetch('https://qytera.de/super-app/health')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse the response body as JSON
+                })
+            console.log("Error retrieving health status");
+        }, 24000);
+    </script>
+
+</body>
+
+</html>
