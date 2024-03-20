@@ -1,4 +1,4 @@
-Gehe direkt zur Präsentation: https://besessener.github.io/WebinarAzureLoadTesting/presentation/
+Gehe direkt zur Präsentation: [Performancetesting mit Microsoft Azure Load Testing](https://besessener.github.io/WebinarAzureLoadTesting/presentation/)
 
 # Agenda
 
