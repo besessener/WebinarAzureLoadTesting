@@ -1,3 +1,5 @@
+Gehe direkt zur Präsentation: https://besessener.github.io/WebinarAzureLoadTesting/presentation/
+
 # Agenda
 
 Website-Performancetests sind für eine optimale Benutzererfahrung und SEO von entscheidender Bedeutung. Sie sind unerlässlich, um die Skalierbarkeit zu überprüfen und zu zeigen, wie gut eine Website unter (wechselnder) Last funktioniert. **Apache JMeter** spielt dabei eine zentrale Rolle, indem es zeigt, wie eine Website unter verschiedenen Lastszenarien reagiert. Seine Skalierbarkeit erlaubt es, von einfachen bis hin zu komplexen Testszenarien alles abzudecken.
