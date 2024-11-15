@@ -207,7 +207,7 @@
 						Optimierung der Leistung von Webanwendungen und anderen Diensten.
 					</aside>
 				</section>
-				<section>
+				<section data-visibility="hidden">
 					<h2>Web-Applikation testen 🌐</h2>
 					<ul>
 						<li>HTTP Request</li>
@@ -224,7 +224,7 @@
 						können.
 					</aside>
 				</section>
-				<section>
+				<section data-visibility="hidden">
 					<pre class="r-stretch">
 						<code data-trim data-noescape data-line-numbers="1-18|8-12">
 							from flask import Flask, request
@@ -360,6 +360,57 @@
 						analysiert werden.
 					</aside>
 				</section>
+				<section data-background-color="white">
+					<h2>Hands-On 👐</h2>
+					<ul>
+						<li>Erstellung eines (einfachen) Tests</li>
+						<li>Skalierung</li>
+						<li>Monitoring</li>
+					</ul>
+					<span class="videoTrigger" data-video-src="videos/azure-load-testing.mp4">🎦</span>
+					<aside class="notes">
+						Und jetzt kommen wir zum spannenden Teil, dem Hands-On. Ich werde euch zeigen wie
+						Azure Load Testing funktioniert. Wir testen wieder die bereits bestehende, einfache Python
+						Anwendung. Nur dieses mal aus der Cloud. Zunächst erstellen wir einen sehr einfachen Test, noch
+						völlig ohne JMeter, dann fügen wir unser zuvor angeschautes JMeter Script hoch und führen es
+						aus. Anschließend schauen wir uns die Ergebnisse an und wie wir das Monitoring nutzen können.
+					</aside>
+				</section>
+				<section data-background-color="white">
+					<img class="r-stretch" src="images/load-testing-variants.png" alt="Azure Load Testing Variants">
+				</section>
+				<section data-background-color="white">
+					<h2>Einfache URL Tests 🥖</h2>
+				</section>
+				<section data-background-color="white">
+					<img class="r-stretch" src="images/simple-step-1.png" alt="simple 1">
+				</section>
+				<section data-background-color="white">
+					<img class="r-stretch" src="images/simple-step-2.png" alt="simple 2">
+				</section>
+				<section data-background-color="white">
+					<img class="r-stretch" src="images/simple-step-3-1.png" alt="simple 3.1">
+				</section>
+				<section data-background-color="white">
+					<img class="r-stretch" src="images/simple-step-3-2.png" alt="simple 3.2">
+				</section>
+				<section data-background-color="white">
+					<h2>Komplexe Tests 🥨</h2>
+					<ul>
+						<li>Azure Load Testing erzeugt intern JMeter Skripte</li>
+						<li>Komplexer wird schnell nötig: Lastprofile, Authentifizierung, E2E</li>
+					</ul>
+				</section>
+				<section data-background-color="white">
+					<h2>Analyse 📈📉</h2>
+					<img class="r-stretch" class="fragment fade-in-then-out" src="images/simple-results.png"
+						alt="simple results">
+				</section>
+				<section data-background-color="white">
+					<h2>Einbindung in Azure DevOps Pipelines 🖇️</h2>
+					<img src="images/pipeline.png" alt="Azure DevOps Pipeline" class="r-stretch">
+					<span class="videoTrigger" data-video-src="videos/load-testing-with-azure-devops.mp4">🎦</span>
+				</section>
 				<section data-background-gradient="linear-gradient(to bottom, white 0, black 50%)">
 					<h2>Kosten 🤑</h2>
 					<ul>
@@ -382,28 +433,7 @@
 						Insgesamt können so bis zu 100.000 virtuelle Benutzer gleichzeitig auf eine Anwendung zugreifen.
 					</aside>
 				</section>
-				<section>
-					<h2>Hands-On 👐</h2>
-					<ul>
-						<li>Erstellung eines (einfachen) Tests</li>
-						<li>Skalierung</li>
-						<li>Monitoring</li>
-					</ul>
-					<span class="videoTrigger" data-video-src="videos/azure-load-testing.mp4">🎦</span>
-					<aside class="notes">
-						Und jetzt kommen wir zum spannenden Teil, dem Hands-On. Ich werde euch zeigen wie
-						Azure Load Testing funktioniert. Wir testen wieder die bereits bestehende, einfache Python
-						Anwendung. Nur dieses mal aus der Cloud. Zunächst erstellen wir einen sehr einfachen Test, noch
-						völlig ohne JMeter, dann fügen wir unser zuvor angeschautes JMeter Script hoch und führen es
-						aus. Anschließend schauen wir uns die Ergebnisse an und wie wir das Monitoring nutzen können.
-					</aside>
-				</section>
-				<section>
-					<h2>Einbindung in Azure DevOps Pipelines 🔗</h2>
-					<img src="images/pipeline.png" alt="Azure DevOps Pipeline" class="r-stretch">
-					<span class="videoTrigger" data-video-src="videos/load-testing-with-azure-devops.mp4">🎦</span>
-				</section>
-				<section>
+				<section data-visibility="hidden">
 					<h2>Aufräumen 🗑️</h2>
 					<aside class="notes">
 						Am Ende eines solchen Tests ist es wichtig, die Ressourcen wieder zu bereinigen. Das ist
