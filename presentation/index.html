@@ -40,15 +40,13 @@
 					<li>Performance-Testing</li>
 					<li>Apache JMeter</li>
 					<ul>
-						<li>Web-Applikation testen</li>
+						<li>Was ist das?</li>
 						<li>JMeter skalieren</li>
 					</ul>
 					<li>Azure Load Testing</li>
 					<ul>
-						<li>Architektur</li>
-						<li>Kosten</li>
+						<li>Grundidee</li>
 						<li>Hands-On</li>
-						<li>Azure DevOps Pipelines</li>
 					</ul>
 					<li>Fazit</li>
 				</ul>
@@ -113,7 +111,7 @@
 						wird.
 					</aside>
 				</section>
-				<section>
+				<section  data-visibility="hidden">
 					<h2>Darum 😇</h2>
 					<span class="videoTrigger" data-video-src="videos/cat.mp4">🎦</span>
 					<aside class="notes">
@@ -129,7 +127,8 @@
 						handhaben ist. Dann wird ganz schnell aus der besten App der Welt das hier:
 				</section>
 				<section>
-					<h1>💩</h1>
+					<img src="images/chuck.png" alt="Chuck Norris" class="r-stretch">
+					<h1 class="fragment">💩</h1>
 					<aside class="notes">
 						Um das zu verhindern, machen wir Performance Tests. Wir wollen sicherstellen, dass unsere
 						Anwendung auch unter Last stabil und schnell bleibt. Wir wollen Engpässe identifizieren, bevor
@@ -138,6 +137,7 @@
 						Anwendung auch in Zukunft skalierbar bleibt. Das sind die Gründe, warum wir Performance Tests
 						durchführen.
 				</section>
+				<section><img src="images/monk.webp" alt="Monk" class="r-stretch"></section>
 				<section>
 					<h2>Performance-Testing Arten 🏋️🧘🚣🏃</h2>
 					<img src="images/performance-tests-types.png" alt="Performance-Testing Arten" class="r-stretch">
@@ -309,14 +309,14 @@
 						Parameter, um den Test dynamischer zu gestalten."
 					</blockquote>
 				</section>
-				<section>
+				<section data-visibility="hidden">
 					<blockquote class="r-stretch">
 						"Wenn Ihre Anwendung auf Azure gehostet wird, sammelt Azure Load Testing detaillierte
 						Ressourcenmetriken, die Ihnen helfen, Leistungsengpässe bei Ihren Azure-Anwendungskomponenten zu
 						erkennen."
 					</blockquote>
 				</section>
-				<section>
+				<section data-visibility="hidden">
 					<blockquote class="r-stretch">
 						"Um Regressionen in der Anwendungsleistung frühzeitig zu erfassen, fügen Sie Ihren
 						Auslastungstest zu Ihrem Continuous Integration und Continuous Deployment (CI/CD)-Workflow
@@ -346,7 +346,7 @@
 						visualisiert und analysiert werden.
 					</aside>
 				</section>
-				<section data-background-color="white">
+				<section data-background-color="white" data-visibility="hidden">
 					<h2>Architektur 🏛️🛕</h2>
 					<img class="r-stretch" src="images/cloud-performance-testing.png" alt="Azure Load Testing">
 					<aside class="notes">
@@ -406,12 +406,12 @@
 					<img class="r-stretch" class="fragment fade-in-then-out" src="images/simple-results.png"
 						alt="simple results">
 				</section>
-				<section data-background-color="white">
+				<section data-background-color="white"  data-visibility="hidden">
 					<h2>Einbindung in Azure DevOps Pipelines 🖇️</h2>
 					<img src="images/pipeline.png" alt="Azure DevOps Pipeline" class="r-stretch">
 					<span class="videoTrigger" data-video-src="videos/load-testing-with-azure-devops.mp4">🎦</span>
 				</section>
-				<section data-background-gradient="linear-gradient(to bottom, white 0, black 50%)">
+				<section data-background-gradient="linear-gradient(to bottom, white 0, black 50%)"  data-visibility="hidden">
 					<h2>Kosten 🤑</h2>
 					<ul>
 						<li>bis zu 100.000 virtuelle User sind möglich</li>
@@ -466,6 +466,50 @@
 			<section>
 				<h2>Vielen Dank! 🙏</h2>
 				<img src="images/qr-code.png" class="r-stretch">
+			</section>
+			<section>
+				<section><h2>Backup</h2></section>
+				<section data-background-color="white">
+					<h2>Architektur 🏛️🛕</h2>
+					<img class="r-stretch" src="images/cloud-performance-testing.png" alt="Azure Load Testing">
+					<aside class="notes">
+						Die Architektur von Azure Load Testing ist relativ einfach. Zunächst muss ich mich entscheiden
+						einen einfachen Test durchzuführen oder einen komplexen. Für den einfachen wird einfach nur eine
+						Website aufgerufen. Dafür erzeugt Azure Load Testing automatisch selbst ein JMeter Script.
+						Ansonsten muss ich selbst eins hochladen. Dieses JMeter Script wird dann auf mehrere Runner
+						verteilt, die Anzahl kann ich selbst festlegen. Die Runner sind virtuelle Maschinen, die die
+						Last auf die Anwendung, rechts, ausüben, in dem sie jeweils das JMeter Script ausführen. Die
+						Ergebnisse werden dann in Azure Monitor gespeichert und können im Azure Load Testing dashboard
+						analysiert werden.
+					</aside>
+				</section>
+				<section data-background-color="white">
+					<h2>Einbindung in Azure DevOps Pipelines 🖇️</h2>
+					<img src="images/pipeline.png" alt="Azure DevOps Pipeline" class="r-stretch">
+					<span class="videoTrigger" data-video-src="videos/load-testing-with-azure-devops.mp4">🎦</span>
+				</section>
+				<section data-background-gradient="linear-gradient(to bottom, white 0, black 50%)">
+					<h2>Kosten 🤑</h2>
+					<ul>
+						<li>bis zu 100.000 virtuelle User sind möglich</li>
+						<li>$0,15 pro VUH (Virtual User Hour), ab 9950 VUH nur noch $0,075</li>
+						<ul>
+							<li>1.000 User * 1 Stunde = 150€</li>
+							<li>10.000 User * 2 Stunde = 9950 * 0.15 + 10.050 * 0.075 = 2246,25</li>
+						</ul>
+					</ul>
+					<aside class="notes">Bei Cloud-Diensten wird häufig auch die Frage nach den Kosten gestellt. Deshalb
+						darf das auch in dieser Präsentation nicht fehlen, auch wenn ich es nur erwähnen will und nicht
+						im Detail darauf eingehen werde. Aber ich finde es wichtig zu wissen.
+						Also, die Kosten für Azure Load Testing sind relativ einfach zu verstehen. Es gibt eine
+						Preisstaffelung, die sich an der Anzahl der virtuellen Benutzerstunden (VUH) orientiert. Bis zu
+						9.950 VUH kostet eine Stunde 15 Cent pro VUH. Ab 9.950 VUH sinkt der Preis auf 7,5 Cent pro VUH.
+						Das bedeutet, dass 1.000 virtuelle Benutzer, die eine Stunde lang eine Last auf eine Anwendung
+						ausüben, 150€ kosten. Bei 10.000 virtuellen Benutzern, die zwei Stunden lang eine Last auf eine
+						Anwendung ausüben, also 20.000 VUH, kostet das 2246,25€.
+						Insgesamt können so bis zu 100.000 virtuelle Benutzer gleichzeitig auf eine Anwendung zugreifen.
+					</aside>
+				</section>
 			</section>
 		</div>
 	</div>
